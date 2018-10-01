@@ -1,17 +1,17 @@
-package com.tudai.practico2ejemplo.entidades;
+package entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class TipoTrabajo {
+public class TipoConocimiento {
 	@Id
 	private int id;
 	@Column (nullable = false)
 	private String nombre;
 
-	public TipoTrabajo(int id, String nombre) {
+	public TipoConocimiento(int id, String nombre) {
 		this.id = id;
 		this.nombre = nombre;
 	}
@@ -25,6 +25,5 @@ public class TipoTrabajo {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
 
 }

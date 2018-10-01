@@ -1,4 +1,4 @@
-package com.tudai.practico2ejemplo.entidades;
+package entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
