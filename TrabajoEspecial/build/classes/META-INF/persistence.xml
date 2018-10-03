@@ -9,12 +9,13 @@
 		<!-- <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
 		<!-- <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider> -->
 		
-		<class>com.tudai.practico2ejemplo.entidades.Usuario</class>
-		<class>com.tudai.practico2ejemplo.entidades.Lugar</class>
-		<class>com.tudai.practico2ejemplo.entidades.Tematica</class>
-		<class>com.tudai.practico2ejemplo.entidades.Trabajo</class>
-		<class>com.tudai.practico2ejemplo.entidades.TipoConocimiento</class>
-		<class>com.tudai.practico2ejemplo.entidades.TipoTrabajo</class>
+		<class>entidades.EMF</class>
+		<class>entidades.Lugar</class>
+		<class>entidades.Tematica</class>
+		<class>entidades.TipoConocimiento</class>
+		<class>entidades.TipoTrabajo</class>
+		<class>entidades.Trabajo</class>
+		<class>entidades.Usuario</class>
 
 		<properties>
 			<!-- Propiedades de configuracion de JDBC para Apache Derby -->
@@ -23,7 +24,7 @@
 			 -->
 			<!-- Propieadades de configuracion de JDBC para MySQL -->
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/CACIC2018" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/CACIC2018?createDatabaseIfNotExist=true" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="" />
 			

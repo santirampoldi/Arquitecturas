@@ -17,7 +17,7 @@ public class HelloWorldServlet extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		
+
 		message = "Hello World";
 	}
 
@@ -25,12 +25,11 @@ public class HelloWorldServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.service(request, response);
 	}
-	
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		
+
 		response.setContentType("text/html");
 		PrintWriter writer = response.getWriter();
 		writer.println("<html>");
