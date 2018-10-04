@@ -3,6 +3,7 @@ package entidades;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Tematica {
@@ -11,6 +12,7 @@ public class Tematica {
 	private int id;
 	@Column (nullable = false)
 	private String nombre;
+	@ManyToOne
 	@Column (nullable = false)
 	private TipoConocimiento tipo;
 	
@@ -23,15 +25,19 @@ public class Tematica {
 	public String getNombre() {
 		return nombre;
 	}
+	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
 	public TipoConocimiento getTipo() {
 		return tipo;
 	}
+	
 	public void setTipo(TipoConocimiento tipo) {
 		this.tipo = tipo;
 	}
+	
 	public int getId() {
 		return id;
 	}

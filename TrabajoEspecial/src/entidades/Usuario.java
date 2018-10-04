@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -18,7 +19,8 @@ public class Usuario{
 	private String nombre;
 	@Column(nullable = false)
 	private String apellido;
-	@Column(nullable = false)
+	@ManyToOne
+	@JoinColumn(nullable = false)
 	private Lugar lugar;
 	@ManyToMany
 	@JoinColumn(nullable = false)
