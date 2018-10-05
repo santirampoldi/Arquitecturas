@@ -20,9 +20,10 @@ public class EMF implements ServletContextListener {
 	}
 
 	public static EntityManager createEntityManager() {
-//		if (emf == null) {
-//			throw new IllegalStateException("Context is not initialized yet.");
-//		}
+		new Persistence();
+		//		if (emf == null) {
+		//			throw new IllegalStateException("Context is not initialized yet.");
+		//		}
 		emf = Persistence.createEntityManagerFactory("TrabajoEspecial-ApacheDerby");
 		return emf.createEntityManager();
 	}
