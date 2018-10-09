@@ -12,7 +12,7 @@ public class EMF implements ServletContextListener {
 	private static EntityManagerFactory emf;
 
 	public void contextInitialized(ServletContextEvent arg0) {
-		emf = Persistence.createEntityManagerFactory("TrabajoEspecial-ApacheDerby");
+		emf = Persistence.createEntityManagerFactory("TrabajoEspecial");
 	}
 
 	public void contextDestroyed(ServletContextEvent arg0) {
@@ -24,7 +24,7 @@ public class EMF implements ServletContextListener {
 		//		if (emf == null) {
 		//			throw new IllegalStateException("Context is not initialized yet.");
 		//		}
-		emf = Persistence.createEntityManagerFactory("TrabajoEspecial-ApacheDerby");
+		emf = Persistence.createEntityManagerFactory("TrabajoEspecial");
 		return emf.createEntityManager();
 	}
 }

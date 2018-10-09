@@ -15,13 +15,13 @@ public class BaseJpaDAO<Entity, ID extends Serializable> implements DAO<Entity, 
 		this.idClass = idClass;
 	}
 
-	@Override
+	
 	public Entity findById(ID id) {
 		Entity entity = entityManager.find(entityClass, id);
 		return entity;
 	}
 
-	@Override
+	
 	public Entity persist(Entity entity) {
 		entityManager.getTransaction().begin();
 		entityManager.persist(entity);
@@ -29,19 +29,19 @@ public class BaseJpaDAO<Entity, ID extends Serializable> implements DAO<Entity, 
 		return entity;
 	}
 
-	@Override
+	
 	public boolean delete(ID id) {
 
 		return false;
 	}
 
-	@Override
+	
 	public List<Entity> findAll() {
 
 		return null;
 	}
 
-	@Override
+	
 	public Entity update(ID id, Entity newEntityValues) {
 
 		return null;

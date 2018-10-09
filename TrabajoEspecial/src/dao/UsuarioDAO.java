@@ -35,6 +35,7 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 		entityManager.persist(usuario);
 		entityManager.getTransaction().commit();
 		entityManager.close();
+		System.out.println("QuiereU");
 		return usuario;
 	}
 

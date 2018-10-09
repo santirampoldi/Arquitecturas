@@ -1,6 +1,9 @@
 package entidades;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,16 +17,16 @@ public class Trabajo {
 	@Id
 	private int id;
 	@ManyToOne
-	@Column(nullable = false)
-	private TipoTrabajo tipo;
-	@ManyToMany(mappedBy = "trabajos")
-	@Column(nullable = false)
-	ArrayList<Usuario>autores;
-	@ManyToMany
 	@JoinColumn(nullable = false)
-	ArrayList<Tematica>temas;
+	private TipoTrabajo tipo;
+	@ManyToMany(mappedBy = "trabajos", cascade = {CascadeType.ALL})
+	@Column(nullable = false)
+	List<Usuario>autores;
+	@ManyToMany(cascade = {CascadeType.ALL})
+	@JoinColumn(nullable = false)
+	List<Tematica>temas;
 
-	public Trabajo(int id, TipoTrabajo tipo, ArrayList<Usuario> autores, ArrayList<Tematica> temas) {
+	public Trabajo(int id, TipoTrabajo tipo, List<Usuario> autores, List<Tematica> temas) {
 		this.id = id;
 		this.tipo = tipo;
 		this.autores = autores;
@@ -38,7 +41,7 @@ public class Trabajo {
 		this.tipo = tipo;
 	}
 
-	public ArrayList<Usuario> getAutores() {
+	public List<Usuario> getAutores() {
 		return autores;
 	}
 
@@ -46,7 +49,7 @@ public class Trabajo {
 		this.autores = autores;
 	}
 
-	public ArrayList<Tematica> getTemas() {
+	public List<Tematica> getTemas() {
 		return temas;
 	}
 

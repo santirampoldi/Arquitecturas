@@ -1,8 +1,10 @@
 package entidades;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -12,8 +14,8 @@ public class Tematica {
 	private int id;
 	@Column (nullable = false)
 	private String nombre;
-	@ManyToOne
-	@Column (nullable = false)
+	@ManyToOne(cascade = {CascadeType.ALL})
+	@JoinColumn (nullable = false)
 	private TipoConocimiento tipo;
 	
 	public Tematica(int id, String nombre, TipoConocimiento tipo) {

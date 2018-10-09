@@ -35,6 +35,7 @@ public class TipoConocimientoDAO extends BaseJpaDAO<TipoConocimiento, Integer> {
 		entityManager.persist(tipoConocimiento);
 		entityManager.getTransaction().commit();
 		entityManager.close();
+		System.out.println("QuiereTC");
 		return tipoConocimiento;
 	}
 

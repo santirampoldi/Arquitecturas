@@ -1,7 +1,8 @@
 package entidades;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,9 +17,9 @@ public class Lugar{
 	private String nombre;
 	@Column(nullable = false)
 	private String ciudad;
-	@OneToMany
-	@JoinColumn(nullable = false)
-	ArrayList<Usuario>trabajadores;
+	@OneToMany(cascade = {CascadeType.ALL})
+	@JoinColumn
+	List<Usuario>trabajadores;
 
 	public Lugar(int id, String nombre, String ciudad) {
 		this.id = id;

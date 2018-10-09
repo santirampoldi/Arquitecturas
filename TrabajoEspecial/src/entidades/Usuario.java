@@ -1,7 +1,8 @@
 package entidades;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,21 +20,22 @@ public class Usuario{
 	private String nombre;
 	@Column(nullable = false)
 	private String apellido;
-	@ManyToOne
-	@JoinColumn(nullable = false)
+	@ManyToOne(cascade = {CascadeType.ALL})
+	@JoinColumn
 	private Lugar lugar;
-	@ManyToMany
-	@JoinColumn(nullable = false)
-	ArrayList<Tematica>temas;
-	@ManyToMany
-	@JoinColumn(nullable = false)
-	ArrayList<Trabajo>trabajos;
+	@ManyToMany(cascade = {CascadeType.ALL})
+	@JoinColumn
+	List<Tematica>temas;
+	@ManyToMany(cascade = {CascadeType.ALL})
+	@JoinColumn
+	List<Trabajo>trabajos;
 
 	public Usuario(int dni, String nombre, String apellido, Lugar lugar) {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.lugar = lugar;
+		//this.trabajos = new List<Trabajo>();
 	}
 
 	public int getDni() {return dni;}

@@ -35,6 +35,7 @@ public class LugarDAO extends BaseJpaDAO<Lugar, Integer> {
 		entityManager.persist(lugar);
 		entityManager.getTransaction().commit();
 		entityManager.close();
+		System.out.println("QuiereL");
 		return lugar;
 	}
 
