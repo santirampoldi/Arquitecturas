@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class TipoTrabajo implements Serializable {
+public class TipoTrabajo {
 	@Id
 	private int id;
 	@Column (nullable = false)

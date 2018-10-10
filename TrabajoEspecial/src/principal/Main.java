@@ -1,7 +1,5 @@
 package principal;
 
-import java.util.List;
-
 import dao.*;
 import entidades.*;
 
@@ -10,10 +8,10 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Lugar lugar = new Lugar(1, "Pladema", "Tandil");
-		TipoConocimiento tipoConocimiento = new TipoConocimiento(1, "Conocimiento2");
-		TipoConocimiento tipoConocimiento2 = new TipoConocimiento(2, "Conocimiento2");
-		Tematica tematica = new Tematica(1, "Tema1", tipoConocimiento);
-		Tematica tematica2 = new Tematica(2, "Tema2", tipoConocimiento2);
+//		TipoConocimiento tipoConocimiento = new TipoConocimiento(1, "Conocimiento2");
+//		TipoConocimiento tipoConocimiento2 = new TipoConocimiento(2, "Conocimiento2");
+//		Tematica tematica = new Tematica(1, "Tema1", tipoConocimiento);
+//		Tematica tematica2 = new Tematica(2, "Tema2", tipoConocimiento2);
 		TipoTrabajo tipoTrabajo = new TipoTrabajo(1, "Poster");
 		Usuario usuario1 = new Usuario(1, "Martin", "Rampoldi", lugar);
 //		Usuario usuario2 = new Usuario(2, "Marcelo", "Rampoldi", lugar);
@@ -23,18 +21,19 @@ public class Main {
 //		Trabajo trabajo = new Trabajo(1, "Pladema", "Tandil");
 		
 		LugarDAO lugarDAO = LugarDAO.getInstance();
-		TipoConocimientoDAO tipoConocimientoDAO = TipoConocimientoDAO.getInstance();
-		TematicaDAO tematicaDAO = TematicaDAO.getInstance();
+//		TipoConocimientoDAO tipoConocimientoDAO = TipoConocimientoDAO.getInstance();
+//		TematicaDAO tematicaDAO = TematicaDAO.getInstance();
 		TipoTrabajoDAO tipoTrabajoDAO = TipoTrabajoDAO.getInstance();
 		UsuarioDAO usuarioDAO = UsuarioDAO.getInstance();
 		
-		lugarDAO.persist(lugar);
 		tipoTrabajoDAO.persist(tipoTrabajo);
+		lugarDAO.persist(lugar);
 		usuarioDAO.persist(usuario1);
-		tipoConocimientoDAO.persist(tipoConocimiento);
-		tipoConocimientoDAO.persist(tipoConocimiento2);
-		tematicaDAO.persist(tematica);
-		tematicaDAO.persist(tematica2);
+
+//		tipoConocimientoDAO.persist(tipoConocimiento);
+//		tipoConocimientoDAO.persist(tipoConocimiento2);
+//		tematicaDAO.persist(tematica);
+//		tematicaDAO.persist(tematica2);
 		
 		System.out.println("Finalizado");
 	}
