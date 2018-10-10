@@ -1,11 +1,13 @@
 package entidades;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class TipoTrabajo {
+public class TipoTrabajo implements Serializable {
 	@Id
 	private int id;
 	@Column (nullable = false)

@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 
 
 @Entity
-public class Usuario{
+public class Usuario {
 
 	@Id
 	private int dni;

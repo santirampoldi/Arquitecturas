@@ -35,7 +35,6 @@ public class TematicaDAO extends BaseJpaDAO<Tematica, Integer> {
 		entityManager.persist(tematica);
 		entityManager.getTransaction().commit();
 		entityManager.close();
-		System.out.println("QuiereT");
 		return tematica;
 	}
 

@@ -6,6 +6,7 @@ import javax.persistence.Id;
 
 @Entity
 public class TipoConocimiento {
+	
 	@Id
 	private int id;
 	@Column (nullable = false)

@@ -35,7 +35,6 @@ public class TipoTrabajoDAO extends BaseJpaDAO<TipoTrabajo, Integer> {
 		entityManager.persist(tipoTrabajo);
 		entityManager.getTransaction().commit();
 		entityManager.close();
-		System.out.println("QuiereTT");
 		return tipoTrabajo;
 	}
 

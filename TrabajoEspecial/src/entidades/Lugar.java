@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Lugar{
+public class Lugar {
 	@Id
 	private int id;
 	@Column(nullable = false)
