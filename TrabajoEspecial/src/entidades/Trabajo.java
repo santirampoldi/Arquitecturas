@@ -19,10 +19,10 @@ public class Trabajo {
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private TipoTrabajo tipo;
-	@ManyToMany(mappedBy = "trabajos", cascade = {CascadeType.ALL})
+	@ManyToMany(mappedBy = "trabajos")
 	@Column(nullable = false)
 	List<Usuario>autores;
-	@ManyToMany(cascade = {CascadeType.ALL})
+	@ManyToMany
 	@JoinColumn(nullable = false)
 	List<Tematica>temas;
 

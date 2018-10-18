@@ -20,13 +20,13 @@ public class Usuario {
 	private String nombre;
 	@Column(nullable = false)
 	private String apellido;
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne
 	@JoinColumn
 	private Lugar lugar;
-	@ManyToMany(cascade = {CascadeType.ALL})
+	@ManyToMany
 	@JoinColumn
 	List<Tematica>temas;
-	@ManyToMany(cascade = {CascadeType.ALL})
+	@ManyToMany
 	@JoinColumn
 	List<Trabajo>trabajos;
 

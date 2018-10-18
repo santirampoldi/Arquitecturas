@@ -17,7 +17,7 @@ public class Lugar {
 	private String nombre;
 	@Column(nullable = false)
 	private String ciudad;
-	@OneToMany(cascade = {CascadeType.ALL})
+	@OneToMany
 	@JoinColumn
 	List<Usuario>trabajadores;
 

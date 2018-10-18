@@ -14,7 +14,7 @@ public class Tematica {
 	private int id;
 	@Column (nullable = false)
 	private String nombre;
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne
 	@JoinColumn (nullable = false)
 	private TipoConocimiento tipo;
 	
