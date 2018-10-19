@@ -1,9 +1,8 @@
 package entidades;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,21 +15,24 @@ public class Trabajo {
 
 	@Id
 	private int id;
+	
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private TipoTrabajo tipo;
+	
 	@ManyToMany(mappedBy = "trabajos")
 	@Column(nullable = false)
-	List<Usuario>autores;
+	Set<Usuario>autores;
+	
 	@ManyToMany
 	@JoinColumn(nullable = false)
-	List<Tematica>temas;
+	Set<Tematica>temas;
 
-	public Trabajo(int id, TipoTrabajo tipo, List<Usuario> autores, List<Tematica> temas) {
+	public Trabajo(int id, TipoTrabajo tipo, Set<Usuario> usuarios, Set<Tematica> tematicas) {
 		this.id = id;
 		this.tipo = tipo;
-		this.autores = autores;
-		this.temas = temas;
+		this.autores = usuarios;
+		this.temas = tematicas;
 	}
 
 	public TipoTrabajo getTipo() {
@@ -41,19 +43,19 @@ public class Trabajo {
 		this.tipo = tipo;
 	}
 
-	public List<Usuario> getAutores() {
+	public Set<Usuario> getAutores() {
 		return autores;
 	}
 
-	public void setAutores(ArrayList<Usuario> autores) {
+	public void setAutores(HashSet<Usuario> autores) {
 		this.autores = autores;
 	}
 
-	public List<Tematica> getTemas() {
+	public Set<Tematica> getTemas() {
 		return temas;
 	}
 
-	public void setTemas(ArrayList<Tematica> temas) {
+	public void setTemas(HashSet<Tematica> temas) {
 		this.temas = temas;
 	}
 

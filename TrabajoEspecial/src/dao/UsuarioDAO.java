@@ -1,6 +1,6 @@
 package dao;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 
@@ -38,14 +38,20 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 		return usuario;
 	}
 
-	@Override
-	public boolean delete(Integer id) {
-		throw new UnsupportedOperationException();
+	public boolean persistMany(Set<Usuario> usuarios) {
+		EntityManager entityManager = EMF.createEntityManager();
+		entityManager.getTransaction().begin();
+		for (Usuario u : usuarios) {
+			entityManager.persist(u);	
+		}
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		return true;
 	}
 
-	@Override
-	public List findAll() {
-		throw new UnsupportedOperationException();
-	}
+//	@Override
+//	public List findAll() {
+//		throw new UnsupportedOperationException();
+//	}
 
 }

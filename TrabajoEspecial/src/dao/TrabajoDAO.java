@@ -1,6 +1,5 @@
 package dao;
 
-import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -38,14 +37,9 @@ public class TrabajoDAO extends BaseJpaDAO<Trabajo, Integer> {
 		return trabajo;
 	}
 
-	@Override
-	public boolean delete(Integer id) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public List findAll() {
-		throw new UnsupportedOperationException();
-	}
+//	@Override
+//	public List findAll() {
+//		throw new UnsupportedOperationException();
+//	}
 
 }

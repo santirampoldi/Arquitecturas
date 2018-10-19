@@ -1,12 +1,14 @@
 package entidades;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -16,26 +18,35 @@ public class Usuario {
 
 	@Id
 	private int dni;
+
 	@Column(nullable = false)
 	private String nombre;
+
 	@Column(nullable = false)
 	private String apellido;
+
 	@ManyToOne
 	@JoinColumn
 	private Lugar lugar;
+
 	@ManyToMany
 	@JoinColumn
 	List<Tematica>temas;
+
 	@ManyToMany
-	@JoinColumn
-	List<Trabajo>trabajos;
+	@JoinTable(
+			name = "evaluador_trabajo",
+			joinColumns = { @JoinColumn(name = "evaluador_id") },
+			inverseJoinColumns = { @JoinColumn(name = "trabajo_id") }
+			)
+	Set<Trabajo> trabajos;
 
 	public Usuario(int dni, String nombre, String apellido, Lugar lugar) {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.lugar = lugar;
-		//this.trabajos = new List<Trabajo>();
+		this.trabajos = new HashSet<Trabajo>();
 	}
 
 	public int getDni() {return dni;}
@@ -53,5 +64,11 @@ public class Usuario {
 	public Lugar getLugar() {return lugar;}
 
 	public void setLugar(Lugar lugar) {this.lugar = lugar;}
+	
+	public Set<Trabajo> getTrabajos() {return this.trabajos;}
+	
+	public void setTrabajos(Set<Trabajo> trabajos) {this.trabajos = trabajos;}
+	
+	public void addTrabajo(Trabajo trabajo) {this.trabajos.add(trabajo);}
 
 }
