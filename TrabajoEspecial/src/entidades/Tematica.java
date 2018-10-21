@@ -23,6 +23,11 @@ public class Tematica {
 		this.tipo = tipo;
 	}
 	
+	@Override
+	public String toString() {
+		return "Tematica [id = " + this.id + ", nombre = " + this.nombre + ", tipo = " + this.tipo.getNombre() + "]";
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

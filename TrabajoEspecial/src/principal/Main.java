@@ -46,19 +46,19 @@ public class Main {
 		tematicas.add(tematica1);
 		tematicas.add(tematica2);
 
-		Trabajo trabajo1 = new Trabajo(1, tipoTrabajo, usuarios, tematicas);
-		
+		Trabajo trabajo1 = new Trabajo(1, "Charla Conicet", tipoTrabajo, usuarios, tematicas);
+
 		usuario3.addTrabajo(trabajo1);
-		
-//		Trabajo trabajo2 = new Trabajo(2, tipoTrabajo, usuarios, tematicas);
-//		Trabajo trabajo3 = new Trabajo(3, tipoTrabajo, usuarios, tematicas);
-//		Trabajo trabajo4 = new Trabajo(4, tipoTrabajo, usuarios, tematicas);
-//		Trabajo trabajo5 = new Trabajo(5, tipoTrabajo, usuarios, tematicas);
-//		Trabajo trabajo6 = new Trabajo(6, tipoTrabajo, usuarios, tematicas);
-//		Trabajo trabajo7 = new Trabajo(7, tipoTrabajo, usuarios, tematicas);
-//		Trabajo trabajo8 = new Trabajo(8, tipoTrabajo, usuarios, tematicas);
-//		Trabajo trabajo9 = new Trabajo(9, tipoTrabajo, usuarios, tematicas);
-//		Trabajo trabajo10 = new Trabajo(10, tipoTrabajo, usuarios, tematicas);
+
+		//		Trabajo trabajo2 = new Trabajo(2, "Go", tipoTrabajo, usuarios, tematicas);
+		//		Trabajo trabajo3 = new Trabajo(3, "Ruby On Rails", tipoTrabajo, usuarios, tematicas);
+		//		Trabajo trabajo4 = new Trabajo(4, "Metodos Agiles", tipoTrabajo, usuarios, tematicas);
+		//		Trabajo trabajo5 = new Trabajo(5, "Python", tipoTrabajo, usuarios, tematicas);
+		//		Trabajo trabajo6 = new Trabajo(6, "Node Js", tipoTrabajo, usuarios, tematicas);
+		//		Trabajo trabajo7 = new Trabajo(7, "Angular Js", tipoTrabajo, usuarios, tematicas);
+		//		Trabajo trabajo8 = new Trabajo(8, "BlockChain", tipoTrabajo, usuarios, tematicas);
+		//		Trabajo trabajo9 = new Trabajo(9, "Testing", tipoTrabajo, usuarios, tematicas);
+		//		Trabajo trabajo10 = new Trabajo(10, "Big Data", tipoTrabajo, usuarios, tematicas);
 
 		LugarDAO lugarDAO = LugarDAO.getInstance();
 		TipoConocimientoDAO tipoConocimientoDAO = TipoConocimientoDAO.getInstance();
@@ -75,6 +75,25 @@ public class Main {
 		tematicaDAO.persist(tematica1);
 		tematicaDAO.persist(tematica2);
 		trabajoDAO.persist(trabajo1);
+
+
+//		System.out.println(lugar.toString());
+//		System.out.println(tipoConocimiento.toString());
+//		System.out.println(tipoConocimiento2.toString());
+//		System.out.println(tematica1.toString());
+//		System.out.println(tematica2.toString());
+//		System.out.println(tipoTrabajo.toString());
+//		System.out.println(trabajo1.toString());
+//		System.out.println(usuario1.toString());
+//		System.out.println(usuario2.toString());
+//		System.out.println(usuario3.toString());
+//		System.out.println(usuario4.toString());
+//		System.out.println(usuario5.toString());
+//		System.out.println(usuario6.toString());
+//		System.out.println(usuario7.toString());
+//		System.out.println(usuario8.toString());
+//		System.out.println(usuario9.toString());
+//		System.out.println(usuario10.toString());
 
 
 		System.out.println("Finalizado");

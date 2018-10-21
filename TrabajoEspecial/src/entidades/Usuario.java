@@ -1,7 +1,6 @@
 package entidades;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -31,7 +30,7 @@ public class Usuario {
 
 	@ManyToMany
 	@JoinColumn
-	List<Tematica>temas;
+	Set<Tematica>temas;
 
 	@ManyToMany
 	@JoinTable(
@@ -47,7 +46,31 @@ public class Usuario {
 		this.apellido = apellido;
 		this.lugar = lugar;
 		this.trabajos = new HashSet<Trabajo>();
+		this.temas = new HashSet<Tematica>();
 	}
+
+	@Override
+	public String toString() {
+		String tr = "";
+		if (!this.trabajos.isEmpty()) {
+			for (Trabajo trabajo : this.trabajos) {
+				tr += trabajo.getNombre() + ", ";
+				tr += trabajo.getTipo().getNombre() + ".  ";
+			}	
+		}
+
+		String te = "";
+		if (!this.temas.isEmpty()) {
+			for (Tematica tematica : this.temas) {
+				te += tematica.getNombre() + ".  ";
+			}	
+		}
+		String retorno = "Usuario [dni = " + this.dni + ", nombre = " + this.nombre + ", apellido = " + this.apellido + ", lugar = " 
+				+ this.lugar.getNombre() + ", temas = " + te + ", trabajos = " + tr + "]"; 
+		return retorno;
+	}
+
+
 
 	public int getDni() {return dni;}
 
@@ -64,11 +87,11 @@ public class Usuario {
 	public Lugar getLugar() {return lugar;}
 
 	public void setLugar(Lugar lugar) {this.lugar = lugar;}
-	
+
 	public Set<Trabajo> getTrabajos() {return this.trabajos;}
-	
+
 	public void setTrabajos(Set<Trabajo> trabajos) {this.trabajos = trabajos;}
-	
+
 	public void addTrabajo(Trabajo trabajo) {this.trabajos.add(trabajo);}
 
 }

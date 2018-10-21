@@ -7,6 +7,11 @@ import javax.persistence.Id;
 
 @Entity
 public class TipoTrabajo {
+	@Override
+	public String toString() {
+		return "TipoTrabajo [id = " + id + ", nombre = " + nombre + "]";
+	}
+
 	@Id
 	private int id;
 	@Column (nullable = false)

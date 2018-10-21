@@ -7,6 +7,11 @@ import javax.persistence.Id;
 @Entity
 public class TipoConocimiento {
 	
+	@Override
+	public String toString() {
+		return "TipoConocimiento [id = " + id + ", nombre = " + nombre + "]";
+	}
+
 	@Id
 	private int id;
 	@Column (nullable = false)

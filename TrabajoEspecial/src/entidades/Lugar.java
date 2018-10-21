@@ -11,16 +11,29 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Lugar {
-	
+
 	@Id
 	private int id;
-	
+
 	@Column(nullable = false)
 	private String nombre;
-	
+
+	@Override
+	public String toString() {
+		String nombres = "";
+		if (!this.trabajadores.isEmpty()) {
+			for (Usuario usuario : this.trabajadores) {
+				nombres += usuario.getNombre() + ", ";
+				nombres += usuario.getApellido() + ".  ";
+			}
+		}
+		String retorno = "Lugar [id = " + this.id + ", nombre = " + this.nombre + ", ciudad = " + this.ciudad + ", trabajadores = " + nombres + "]";
+		return retorno; 
+	}
+
 	@Column(nullable = false)
 	private String ciudad;
-	
+
 	@OneToMany
 	@JoinColumn
 	Set<Usuario>trabajadores;
@@ -29,6 +42,7 @@ public class Lugar {
 		this.id = id;
 		this.nombre = nombre;
 		this.ciudad = ciudad;
+		this.trabajadores = new HashSet<Usuario>();
 	}
 
 	public int getId() {
