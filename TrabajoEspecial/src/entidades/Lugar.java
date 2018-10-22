@@ -22,12 +22,14 @@ public class Lugar {
 	public String toString() {
 		String nombres = "";
 		if (!this.trabajadores.isEmpty()) {
+			nombres += ", trabajadores = ";
 			for (Usuario usuario : this.trabajadores) {
 				nombres += usuario.getNombre() + ", ";
 				nombres += usuario.getApellido() + ".  ";
 			}
 		}
-		String retorno = "Lugar [id = " + this.id + ", nombre = " + this.nombre + ", ciudad = " + this.ciudad + ", trabajadores = " + nombres + "]";
+		String retorno = "Lugar [id = " + this.id + ", nombre = " + this.nombre + ", ciudad = " + this.ciudad 
+				+ nombres + "]";
 		return retorno; 
 	}
 

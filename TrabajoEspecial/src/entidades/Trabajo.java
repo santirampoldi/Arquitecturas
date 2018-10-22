@@ -52,7 +52,8 @@ public class Trabajo {
 			a += tematica.getNombre() + ".  ";
 		}
 
-		String retorno = "Lugar [id = " + this.id + ", nombre = " + this.nombre + ", tipo = " + this.tipo.getNombre() + ", autores = " + a + ", tematicas = " + t + "]";
+		String retorno = "Lugar [id = " + this.id + ", nombre = " + this.nombre + ", tipo = " + this.tipo.getNombre() 
+		+ ", autores = " + a + ", tematicas = " + t + "]";
 		return retorno; 
 	}
 

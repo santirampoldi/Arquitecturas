@@ -3,49 +3,51 @@ package entidades;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Tematica {
-	
+
 	@Id
 	private int id;
 	@Column (nullable = false)
 	private String nombre;
-	@ManyToOne
-	@JoinColumn (nullable = false)
-	private TipoConocimiento tipo;
-	
-	public Tematica(int id, String nombre, TipoConocimiento tipo) {
+	@Column (nullable = false)
+	private Boolean esExperto;
+
+	public Tematica(int id, String nombre, Boolean esExperto) {
 		this.id = id;
 		this.nombre = nombre;
-		this.tipo = tipo;
+		this.esExperto = esExperto;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Tematica [id = " + this.id + ", nombre = " + this.nombre + ", tipo = " + this.tipo.getNombre() + "]";
+		String s = "";
+		
+		if (esExperto) { s = "Conocimiento experto"; }
+		else { s = "Conocimiento general"; }
+		
+		return "Tematica [id = " + this.id + ", nombre = " + this.nombre + ", esExperto = " + s + "]";
 	}
 
 	public String getNombre() {
 		return nombre;
 	}
-	
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	public TipoConocimiento getTipo() {
-		return tipo;
+
+	public Boolean getTipo() {
+		return esExperto;
 	}
-	
-	public void setTipo(TipoConocimiento tipo) {
-		this.tipo = tipo;
+
+	public void setTipo(Boolean esExperto) {
+		this.esExperto = esExperto;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
-	
+
 }

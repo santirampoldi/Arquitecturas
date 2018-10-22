@@ -53,6 +53,7 @@ public class Usuario {
 	public String toString() {
 		String tr = "";
 		if (!this.trabajos.isEmpty()) {
+			tr += ", trabajos = ";
 			for (Trabajo trabajo : this.trabajos) {
 				tr += trabajo.getNombre() + ", ";
 				tr += trabajo.getTipo().getNombre() + ".  ";
@@ -61,12 +62,13 @@ public class Usuario {
 
 		String te = "";
 		if (!this.temas.isEmpty()) {
+			te += ", temas = ";
 			for (Tematica tematica : this.temas) {
 				te += tematica.getNombre() + ".  ";
 			}	
 		}
 		String retorno = "Usuario [dni = " + this.dni + ", nombre = " + this.nombre + ", apellido = " + this.apellido + ", lugar = " 
-				+ this.lugar.getNombre() + ", temas = " + te + ", trabajos = " + tr + "]"; 
+				+ this.lugar.getNombre() + te + tr + "]"; 
 		return retorno;
 	}
 

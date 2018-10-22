@@ -1,5 +1,8 @@
 package principal;
 
+//import java.io.BufferedReader;
+//import java.io.FileReader;
+//import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,13 +11,30 @@ import entidades.*;
 
 
 public class Main {
+
+
+//	private void reader(){
+//
+//		String csvFile = "dataset4.csv";
+//		String line = "";
+//		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))){			
+//			br.readLine();//salta la primera linea
+//
+//			while ((line = br.readLine()) != null) {
+//				
+//			}
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
+
+
 	public static void main(String[] args) {
 
 		Lugar lugar = new Lugar(1, "Pladema", "Tandil");
-		TipoConocimiento tipoConocimiento = new TipoConocimiento(1, "Conocimiento1");
-		TipoConocimiento tipoConocimiento2 = new TipoConocimiento(2, "Conocimiento2");
-		Tematica tematica1 = new Tematica(1, "Tema1", tipoConocimiento);
-		Tematica tematica2 = new Tematica(2, "Tema2", tipoConocimiento2);
+		Tematica tematica1 = new Tematica(1, "Tema1", true);
+		Tematica tematica2 = new Tematica(2, "Tema2", false);
 		TipoTrabajo tipoTrabajo = new TipoTrabajo(1, "Poster");
 
 		Usuario usuario1 = new Usuario(1, "Martin", "Rampoldi", lugar);
@@ -61,7 +81,6 @@ public class Main {
 		//		Trabajo trabajo10 = new Trabajo(10, "Big Data", tipoTrabajo, usuarios, tematicas);
 
 		LugarDAO lugarDAO = LugarDAO.getInstance();
-		TipoConocimientoDAO tipoConocimientoDAO = TipoConocimientoDAO.getInstance();
 		TematicaDAO tematicaDAO = TematicaDAO.getInstance();
 		TipoTrabajoDAO tipoTrabajoDAO = TipoTrabajoDAO.getInstance();
 		UsuarioDAO usuarioDAO = UsuarioDAO.getInstance();
@@ -70,30 +89,26 @@ public class Main {
 		tipoTrabajoDAO.persist(tipoTrabajo);
 		lugarDAO.persist(lugar);
 		usuarioDAO.persistMany(usuarios);
-		tipoConocimientoDAO.persist(tipoConocimiento);
-		tipoConocimientoDAO.persist(tipoConocimiento2);
 		tematicaDAO.persist(tematica1);
 		tematicaDAO.persist(tematica2);
 		trabajoDAO.persist(trabajo1);
 
 
-//		System.out.println(lugar.toString());
-//		System.out.println(tipoConocimiento.toString());
-//		System.out.println(tipoConocimiento2.toString());
-//		System.out.println(tematica1.toString());
-//		System.out.println(tematica2.toString());
-//		System.out.println(tipoTrabajo.toString());
-//		System.out.println(trabajo1.toString());
-//		System.out.println(usuario1.toString());
-//		System.out.println(usuario2.toString());
-//		System.out.println(usuario3.toString());
-//		System.out.println(usuario4.toString());
-//		System.out.println(usuario5.toString());
-//		System.out.println(usuario6.toString());
-//		System.out.println(usuario7.toString());
-//		System.out.println(usuario8.toString());
-//		System.out.println(usuario9.toString());
-//		System.out.println(usuario10.toString());
+		//		System.out.println(lugar.toString());
+		//		System.out.println(tematica1.toString());
+		//		System.out.println(tematica2.toString());
+		//		System.out.println(tipoTrabajo.toString());
+		//		System.out.println(trabajo1.toString());
+		//		System.out.println(usuario1.toString());
+		//		System.out.println(usuario2.toString());
+		//		System.out.println(usuario3.toString());
+		//		System.out.println(usuario4.toString());
+		//		System.out.println(usuario5.toString());
+		//		System.out.println(usuario6.toString());
+		//		System.out.println(usuario7.toString());
+		//		System.out.println(usuario8.toString());
+		//		System.out.println(usuario9.toString());
+		//		System.out.println(usuario10.toString());
 
 
 		System.out.println("Finalizado");

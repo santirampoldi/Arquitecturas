@@ -12,7 +12,6 @@
 
 		<class>entidades.EMF</class>
 		<class>entidades.Tematica</class>
-		<class>entidades.TipoConocimiento</class>
 		<class>entidades.TipoTrabajo</class>
 		<class>entidades.Lugar</class>
 		<class>entidades.Trabajo</class>
