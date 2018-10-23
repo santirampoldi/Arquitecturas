@@ -2,20 +2,21 @@ package entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Tematica {
 
 	@Id
+	@GeneratedValue
 	private int id;
 	@Column (nullable = false)
 	private String nombre;
 	@Column (nullable = false)
 	private Boolean esExperto;
 
-	public Tematica(int id, String nombre, Boolean esExperto) {
-		this.id = id;
+	public Tematica(String nombre, Boolean esExperto) {
 		this.nombre = nombre;
 		this.esExperto = esExperto;
 	}

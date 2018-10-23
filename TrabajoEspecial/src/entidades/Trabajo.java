@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -14,6 +15,7 @@ import javax.persistence.ManyToOne;
 public class Trabajo {
 
 	@Id
+	@GeneratedValue
 	private int id;
 
 	@Column(nullable = false)
@@ -31,17 +33,15 @@ public class Trabajo {
 	@JoinColumn(nullable = false)
 	Set<Tematica>temas;
 
-	public Trabajo(int id, String nombre, TipoTrabajo tipo, Set<Usuario> usuarios, Set<Tematica> tematicas) {
+	public Trabajo(String nombre, TipoTrabajo tipo, Set<Usuario> usuarios, Set<Tematica> tematicas) {
 		this.nombre = nombre;
-		this.id = id;
 		this.tipo = tipo;
 		this.autores = usuarios;
 		this.temas = tematicas;
 	}
 	
-	public Trabajo(int id, String nombre) {
+	public Trabajo(String nombre) {
 		this.nombre = nombre;
-		this.id = id;
 	}
 
 	@Override
@@ -57,9 +57,9 @@ public class Trabajo {
 			a += tematica.getNombre() + ".  ";
 		}
 
-		String retorno = "Lugar [id = " + this.id + ", nombre = " + this.nombre + ", tipo = " + this.tipo.getNombre() 
+		String retorno = "Trabajo [id = " + this.id + ", nombre = " + this.nombre + ", tipo = " + this.tipo.getNombre() 
 		+ ", autores = " + a + ", tematicas = " + t + "]";
-		return retorno; 
+		return retorno;
 	}
 
 	public String getNombre() {

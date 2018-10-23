@@ -16,7 +16,7 @@ public class UsuarioTest {
 
 	@BeforeClass
 	public void createUsuario(){
-		this.uncpba = new Lugar(1, "uncpba", "Tandil");
+		this.uncpba = new Lugar("uncpba", "Tandil");
 		this.usuario = new Usuario(36626800, "Agustin", "Meliendrez", uncpba);
 	}
 	

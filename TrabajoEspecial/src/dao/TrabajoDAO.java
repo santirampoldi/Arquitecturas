@@ -1,10 +1,14 @@
 package dao;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.EntityManager;
 
 import entidades.EMF;
-import entidades.Trabajo;    
+import entidades.Trabajo;
+import entidades.Usuario;    
 
 public class TrabajoDAO extends BaseJpaDAO<Trabajo, Integer> {
 
@@ -35,6 +39,13 @@ public class TrabajoDAO extends BaseJpaDAO<Trabajo, Integer> {
 		entityManager.getTransaction().commit();
 		entityManager.close();
 		return trabajo;
+	}
+	
+	public Set<Usuario> evaluadoresAsignables(Trabajo t) {
+		Set<Usuario> retorno = new HashSet<Usuario>();
+		
+		
+		return retorno;
 	}
 
 //	@Override

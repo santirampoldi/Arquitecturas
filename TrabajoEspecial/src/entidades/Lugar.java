@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -13,6 +14,7 @@ import javax.persistence.OneToMany;
 public class Lugar {
 
 	@Id
+	@GeneratedValue
 	private int id;
 
 	@Column(nullable = false)
@@ -25,11 +27,14 @@ public class Lugar {
 	@JoinColumn
 	Set<Usuario>trabajadores;
 
-	public Lugar(int id, String nombre, String ciudad) {
-		this.id = id;
+	public Lugar(String nombre, String ciudad) {
 		this.nombre = nombre;
 		this.ciudad = ciudad;
 		this.trabajadores = new HashSet<Usuario>();
+	}
+
+	public boolean equals(Lugar l) {
+		return (this.nombre.equals(l.getNombre()) && this.ciudad.equals(l.getCiudad()));
 	}
 
 	@Override
