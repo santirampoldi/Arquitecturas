@@ -18,6 +18,20 @@ public class Lugar {
 	@Column(nullable = false)
 	private String nombre;
 
+	@Column(nullable = false)
+	private String ciudad;
+
+	@OneToMany
+	@JoinColumn
+	Set<Usuario>trabajadores;
+
+	public Lugar(int id, String nombre, String ciudad) {
+		this.id = id;
+		this.nombre = nombre;
+		this.ciudad = ciudad;
+		this.trabajadores = new HashSet<Usuario>();
+	}
+
 	@Override
 	public String toString() {
 		String nombres = "";
@@ -31,20 +45,6 @@ public class Lugar {
 		String retorno = "Lugar [id = " + this.id + ", nombre = " + this.nombre + ", ciudad = " + this.ciudad 
 				+ nombres + "]";
 		return retorno; 
-	}
-
-	@Column(nullable = false)
-	private String ciudad;
-
-	@OneToMany
-	@JoinColumn
-	Set<Usuario>trabajadores;
-
-	public Lugar(int id, String nombre, String ciudad) {
-		this.id = id;
-		this.nombre = nombre;
-		this.ciudad = ciudad;
-		this.trabajadores = new HashSet<Usuario>();
 	}
 
 	public int getId() {

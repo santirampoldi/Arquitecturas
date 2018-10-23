@@ -3,7 +3,9 @@ package principal;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import dao.*;
@@ -12,43 +14,22 @@ import entidades.*;
 
 public class Main {
 
-	private static Set<Usuario> readerUsuarios(){
+	private static ArrayList<String> reader(String src){
 
-		Set<Usuario> retorno = new HashSet<Usuario>();
+		ArrayList<String> retorno = new ArrayList<String>();
 
-		String csvFile = "src/resources/Usuarios.csv";
+		String csvFile = src;
 		String line = "";
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))){			
 			br.readLine();
 
 			while ((line = br.readLine()) != null) {
-				String[] usuarios = line.split(",");
-				int dni = Integer.parseInt(usuarios[0]);
+				String[] items = line.split(",");
 
-				retorno.add(new Usuario(dni, usuarios[1], usuarios[2]));
-			}
+				for (int i = 0; i < items.length; i++) {
+					retorno.add(items[i]);
+				}
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return retorno;
-	}
-
-
-	private static Set<Object> readerTrabajos(){
-
-		Set<Object> retorno = new HashSet<Object>();
-
-		String csvFile = "src/resources/Trabajos.csv";
-		String line = "";
-		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))){			
-			br.readLine();
-
-			while ((line = br.readLine()) != null) {
-				String[] trabajos = line.split(",");
-
-				retorno.add(new Trabajo(1, trabajos[0]));
 			}
 
 		} catch (IOException e) {
@@ -61,41 +42,34 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Set<Usuario>usuarios = readerUsuarios();
-		Set<Object>trabajos = readerTrabajos();
-		
-		for (Usuario usuario : usuarios) {
-			System.out.println(usuario.getNombre() + ", " + usuario.getApellido());
-		}
+		ArrayList<String>u = reader("src/resources/Usuarios.csv");
+		ArrayList<String>t = reader("src/resources/Trabajos.csv");
 
-		for (Object trabajo : trabajos) {
-			System.out.println(((Trabajo) trabajo).getNombre());
-		}
+		Set<Usuario>usuarios = new HashSet<Usuario>();
+		Set<Trabajo>trabajos = new HashSet<Trabajo>();
 
-		/*
+		Lugar lugar = new Lugar(1, "Conicet", "Tandil");
 		Tematica tematica1 = new Tematica(1, "Tema1", true);
 		Tematica tematica2 = new Tematica(2, "Tema2", false);
 		TipoTrabajo tipoTrabajo1 = new TipoTrabajo(1, "Poster");
 		TipoTrabajo tipoTrabajo2 = new TipoTrabajo(2, "Articulo");
 		TipoTrabajo tipoTrabajo3 = new TipoTrabajo(3, "Poster");
 
-
 		Set<Tematica>tematicas = new HashSet<Tematica>();
 		tematicas.add(tematica1);
 		tematicas.add(tematica2);
 
-		Trabajo trabajo1 = new Trabajo(1, "Charla Conicet", tipoTrabajo1, usuarios, tematicas);
 
+		for (int i = 0; i < u.size(); i+=3) {
+			int dni = Integer.parseInt(u.get(i));
+			usuarios.add(new Usuario(dni, u.get(i+1), u.get(i+2), lugar));
+		}
 
-		//		Trabajo trabajo2 = new Trabajo(2, "Go", tipoTrabajo, usuarios, tematicas);
-		//		Trabajo trabajo3 = new Trabajo(3, "Ruby On Rails", tipoTrabajo, usuarios, tematicas);
-		//		Trabajo trabajo4 = new Trabajo(4, "Metodos Agiles", tipoTrabajo, usuarios, tematicas);
-		//		Trabajo trabajo5 = new Trabajo(5, "Python", tipoTrabajo, usuarios, tematicas);
-		//		Trabajo trabajo6 = new Trabajo(6, "Node Js", tipoTrabajo, usuarios, tematicas);
-		//		Trabajo trabajo7 = new Trabajo(7, "Angular Js", tipoTrabajo, usuarios, tematicas);
-		//		Trabajo trabajo8 = new Trabajo(8, "BlockChain", tipoTrabajo, usuarios, tematicas);
-		//		Trabajo trabajo9 = new Trabajo(9, "Testing", tipoTrabajo, usuarios, tematicas);
-		//		Trabajo trabajo10 = new Trabajo(10, "Big Data", tipoTrabajo, usuarios, tematicas);
+		for (int i = 0; i < t.size(); i+=2) {
+			int id = Integer.parseInt(t.get(i));
+			trabajos.add(new Trabajo(id, t.get(i+1), tipoTrabajo1, usuarios, tematicas));
+		}
+
 
 		LugarDAO lugarDAO = LugarDAO.getInstance();
 		TematicaDAO tematicaDAO = TematicaDAO.getInstance();
@@ -106,31 +80,46 @@ public class Main {
 		tipoTrabajoDAO.persist(tipoTrabajo1);
 		tipoTrabajoDAO.persist(tipoTrabajo2);
 		tipoTrabajoDAO.persist(tipoTrabajo3);
-//		lugarDAO.persist(lugar);
-		usuarioDAO.persistMany(usuarios);
+		lugarDAO.persist(lugar);
+
+		Iterator<Usuario> itp2 = usuarios.iterator();
+
+		while (itp2.hasNext()) {
+			Usuario usuario = itp2.next();
+			usuarioDAO.persist(usuario);
+		}
+
 		tematicaDAO.persist(tematica1);
 		tematicaDAO.persist(tematica2);
-		trabajoDAO.persist(trabajo1);
+
+		Iterator<Trabajo> itp = trabajos.iterator();
+
+		while (itp.hasNext()) {
+			Trabajo trabajo = itp.next();
+			trabajoDAO.persist(trabajo);
+		}
 
 
-		//		System.out.println(lugar.toString());
-		//		System.out.println(tematica1.toString());
-		//		System.out.println(tematica2.toString());
-		//		System.out.println(tipoTrabajo.toString());
-		//		System.out.println(trabajo1.toString());
-		//		System.out.println(usuario1.toString());
-		//		System.out.println(usuario2.toString());
-		//		System.out.println(usuario3.toString());
-		//		System.out.println(usuario4.toString());
-		//		System.out.println(usuario5.toString());
-		//		System.out.println(usuario6.toString());
-		//		System.out.println(usuario7.toString());
-		//		System.out.println(usuario8.toString());
-		//		System.out.println(usuario9.toString());
-		//		System.out.println(usuario10.toString());
+		System.out.println(lugar.toString());
+		System.out.println(tematica1.toString());
+		System.out.println(tematica2.toString());
+		System.out.println(tipoTrabajo1.toString());
+
+		Iterator<Trabajo> its = trabajos.iterator();
+
+		while (its.hasNext()) {
+			Trabajo trabajo = its.next();
+			System.out.println(trabajo.toString());
+		}
+		
+		Iterator<Usuario> its2 = usuarios.iterator();
+
+		while (its2.hasNext()) {
+			Usuario usuario = its2.next();
+			System.out.println(usuario.toString());
+		}
 
 
 		System.out.println("Finalizado");
-		 */
 	}
 }
