@@ -48,6 +48,14 @@ public class Usuario {
 		this.trabajos = new HashSet<Trabajo>();
 		this.temas = new HashSet<Tematica>();
 	}
+	
+	public Usuario(int dni, String nombre, String apellido) {
+		this.dni = dni;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.trabajos = new HashSet<Trabajo>();
+		this.temas = new HashSet<Tematica>();
+	}
 
 	@Override
 	public String toString() {

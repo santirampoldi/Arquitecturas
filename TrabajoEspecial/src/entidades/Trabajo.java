@@ -38,6 +38,11 @@ public class Trabajo {
 		this.autores = usuarios;
 		this.temas = tematicas;
 	}
+	
+	public Trabajo(int id, String nombre) {
+		this.nombre = nombre;
+		this.id = id;
+	}
 
 	@Override
 	public String toString() {

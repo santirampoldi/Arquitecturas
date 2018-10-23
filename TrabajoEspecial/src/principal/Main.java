@@ -1,8 +1,8 @@
 package principal;
 
-//import java.io.BufferedReader;
-//import java.io.FileReader;
-//import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,63 +12,80 @@ import entidades.*;
 
 public class Main {
 
+	private static Set<Usuario> readerUsuarios(){
 
-//	private void reader(){
-//
-//		String csvFile = "dataset4.csv";
-//		String line = "";
-//		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))){			
-//			br.readLine();//salta la primera linea
-//
-//			while ((line = br.readLine()) != null) {
-//				
-//			}
-//
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
+		Set<Usuario> retorno = new HashSet<Usuario>();
+
+		String csvFile = "src/resources/Usuarios.csv";
+		String line = "";
+		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))){			
+			br.readLine();
+
+			while ((line = br.readLine()) != null) {
+				String[] usuarios = line.split(",");
+				int dni = Integer.parseInt(usuarios[0]);
+
+				retorno.add(new Usuario(dni, usuarios[1], usuarios[2]));
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return retorno;
+	}
+
+
+	private static Set<Object> readerTrabajos(){
+
+		Set<Object> retorno = new HashSet<Object>();
+
+		String csvFile = "src/resources/Trabajos.csv";
+		String line = "";
+		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))){			
+			br.readLine();
+
+			while ((line = br.readLine()) != null) {
+				String[] trabajos = line.split(",");
+
+				retorno.add(new Trabajo(1, trabajos[0]));
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return retorno;
+	}
 
 
 	public static void main(String[] args) {
 
-		Lugar lugar = new Lugar(1, "Pladema", "Tandil");
+		Set<Usuario>usuarios = readerUsuarios();
+		Set<Object>trabajos = readerTrabajos();
+		
+		for (Usuario usuario : usuarios) {
+			System.out.println(usuario.getNombre() + ", " + usuario.getApellido());
+		}
+
+		for (Object trabajo : trabajos) {
+			System.out.println(((Trabajo) trabajo).getNombre());
+		}
+
+		/*
 		Tematica tematica1 = new Tematica(1, "Tema1", true);
 		Tematica tematica2 = new Tematica(2, "Tema2", false);
-		TipoTrabajo tipoTrabajo = new TipoTrabajo(1, "Poster");
+		TipoTrabajo tipoTrabajo1 = new TipoTrabajo(1, "Poster");
+		TipoTrabajo tipoTrabajo2 = new TipoTrabajo(2, "Articulo");
+		TipoTrabajo tipoTrabajo3 = new TipoTrabajo(3, "Poster");
 
-		Usuario usuario1 = new Usuario(1, "Martin", "Rampoldi", lugar);
-		Usuario usuario2 = new Usuario(2, "Marcelo", "Rampoldi", lugar);
-		Usuario usuario3 = new Usuario(3, "Fernando", "Rampoldi", lugar);
-		Usuario usuario4 = new Usuario(4, "Lionel", "Rampoldi", lugar);
-		Usuario usuario5 = new Usuario(5, "Marcelo", "Rampoldi", lugar);
-		Usuario usuario6 = new Usuario(6, "Fernando", "Rampoldi", lugar);
-		Usuario usuario7 = new Usuario(7, "Lionel", "Rampoldi", lugar);
-		Usuario usuario8 = new Usuario(8, "Marcelo", "Rampoldi", lugar);
-		Usuario usuario9 = new Usuario(9, "Fernando", "Rampoldi", lugar);
-		Usuario usuario10 = new Usuario(10, "Lionel", "Rampoldi", lugar);
-
-
-
-		Set<Usuario>usuarios = new HashSet<Usuario>();
-		usuarios.add(usuario1);
-		usuarios.add(usuario2);
-		usuarios.add(usuario3);
-		usuarios.add(usuario4);
-		usuarios.add(usuario5);
-		usuarios.add(usuario6);
-		usuarios.add(usuario7);
-		usuarios.add(usuario8);
-		usuarios.add(usuario9);
-		usuarios.add(usuario10);
 
 		Set<Tematica>tematicas = new HashSet<Tematica>();
 		tematicas.add(tematica1);
 		tematicas.add(tematica2);
 
-		Trabajo trabajo1 = new Trabajo(1, "Charla Conicet", tipoTrabajo, usuarios, tematicas);
+		Trabajo trabajo1 = new Trabajo(1, "Charla Conicet", tipoTrabajo1, usuarios, tematicas);
 
-		usuario3.addTrabajo(trabajo1);
 
 		//		Trabajo trabajo2 = new Trabajo(2, "Go", tipoTrabajo, usuarios, tematicas);
 		//		Trabajo trabajo3 = new Trabajo(3, "Ruby On Rails", tipoTrabajo, usuarios, tematicas);
@@ -86,8 +103,10 @@ public class Main {
 		UsuarioDAO usuarioDAO = UsuarioDAO.getInstance();
 		TrabajoDAO trabajoDAO = TrabajoDAO.getInstance();
 
-		tipoTrabajoDAO.persist(tipoTrabajo);
-		lugarDAO.persist(lugar);
+		tipoTrabajoDAO.persist(tipoTrabajo1);
+		tipoTrabajoDAO.persist(tipoTrabajo2);
+		tipoTrabajoDAO.persist(tipoTrabajo3);
+//		lugarDAO.persist(lugar);
 		usuarioDAO.persistMany(usuarios);
 		tematicaDAO.persist(tematica1);
 		tematicaDAO.persist(tematica2);
@@ -112,5 +131,6 @@ public class Main {
 
 
 		System.out.println("Finalizado");
+		 */
 	}
 }
