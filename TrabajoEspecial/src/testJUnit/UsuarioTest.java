@@ -47,7 +47,7 @@ public class UsuarioTest {
 
 	@Before
 	public void testCreateUsuario() {
-		this.uncpba = new Lugar(1, "uncpba", "Tandil");
+		this.uncpba = new Lugar("uncpba", "Tandil");
 		this.usuario = new Usuario(36626800, "Agustin", "Meliendrez", uncpba);
 		System.out.println("Usuario -> testCreateUsuario");
 	}

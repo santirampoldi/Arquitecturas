@@ -30,20 +30,8 @@ public class BaseJpaDAO<Entity, ID extends Serializable> implements DAO<Entity, 
 	}
 
 	
-	public boolean delete(ID id) {
-
-		return false;
-	}
-
-	
 	public List<Entity> findAll() {
-
 		return null;
 	}
 
-	
-	public Entity update(ID id, Entity newEntityValues) {
-
-		return null;
-	}
 }

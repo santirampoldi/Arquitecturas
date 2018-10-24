@@ -39,11 +39,6 @@ public class TipoTrabajoDAO extends BaseJpaDAO<TipoTrabajo, Integer> {
 	}
 
 	@Override
-	public boolean delete(Integer id) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public List findAll() {
 		throw new UnsupportedOperationException();
 	}

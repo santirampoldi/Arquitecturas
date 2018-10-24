@@ -3,23 +3,28 @@ package entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class TipoTrabajo {
-	@Override
-	public String toString() {
-		return "TipoTrabajo [id = " + id + ", nombre = " + nombre + "]";
-	}
 
-	@Id
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column (nullable = false)
 	private String nombre;
 
-	public TipoTrabajo(int id, String nombre) {
-		this.id = id;
+	public TipoTrabajo(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public TipoTrabajo() {
+	}
+	
+	@Override
+	public String toString() {
+		return "TipoTrabajo [id = " + id + ", nombre = " + nombre + "]";
 	}
 
 	public int getId() {

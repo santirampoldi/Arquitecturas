@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import dao.*;
@@ -13,6 +14,7 @@ import entidades.*;
 
 
 public class Main {
+
 
 	private static ArrayList<String> reader(String src){
 
@@ -22,20 +24,13 @@ public class Main {
 		String line = "";
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))){			
 			br.readLine();
-
 			while ((line = br.readLine()) != null) {
 				String[] items = line.split(",");
-
 				for (int i = 0; i < items.length; i++) {
 					retorno.add(items[i]);
 				}
-
 			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		} catch (IOException e) { e.printStackTrace(); }
 		return retorno;
 	}
 
@@ -47,27 +42,40 @@ public class Main {
 
 		Set<Usuario>usuarios = new HashSet<Usuario>();
 		Set<Trabajo>trabajos = new HashSet<Trabajo>();
+		Set<Lugar>lugares = new HashSet<Lugar>();
 
-		Lugar lugar = new Lugar(1, "Conicet", "Tandil");
-		Tematica tematica1 = new Tematica(1, "Tema1", true);
-		Tematica tematica2 = new Tematica(2, "Tema2", false);
-		TipoTrabajo tipoTrabajo1 = new TipoTrabajo(1, "Poster");
-		TipoTrabajo tipoTrabajo2 = new TipoTrabajo(2, "Articulo");
-		TipoTrabajo tipoTrabajo3 = new TipoTrabajo(3, "Poster");
+		Tematica tematica1 = new Tematica("Tema1", true);
+		Tematica tematica2 = new Tematica("Tema2", false);
+		TipoTrabajo tipoTrabajo1 = new TipoTrabajo("Poster");
+		TipoTrabajo tipoTrabajo2 = new TipoTrabajo("Articulo");
+		TipoTrabajo tipoTrabajo3 = new TipoTrabajo("Poster");
 
 		Set<Tematica>tematicas = new HashSet<Tematica>();
 		tematicas.add(tematica1);
 		tematicas.add(tematica2);
 
 
-		for (int i = 0; i < u.size(); i+=3) {
+		for (int i = 0; i < u.size(); i+=5) {
+			Lugar lugarTemp = new Lugar(u.get(i+3), u.get(i+4));
+			Iterator<Lugar> itlugar = lugares.iterator();
+			Boolean existe = false;
+			while (itlugar.hasNext()) {
+				Lugar lugar = (Lugar) itlugar.next();
+				if (lugar.equals(lugarTemp)) {
+					lugarTemp = lugar;
+					existe = true;
+					break;
+				}
+			}
+			if (existe == false) {
+				lugares.add(lugarTemp);
+			}
 			int dni = Integer.parseInt(u.get(i));
-			usuarios.add(new Usuario(dni, u.get(i+1), u.get(i+2), lugar));
+			usuarios.add(new Usuario(dni, u.get(i+1), u.get(i+2), lugarTemp));
 		}
 
-		for (int i = 0; i < t.size(); i+=2) {
-			int id = Integer.parseInt(t.get(i));
-			trabajos.add(new Trabajo(id, t.get(i+1), tipoTrabajo1, usuarios, tematicas));
+		for (int i = 0; i < t.size(); i++) {
+			trabajos.add(new Trabajo(t.get(i), tipoTrabajo1, usuarios, tematicas));
 		}
 
 
@@ -80,7 +88,14 @@ public class Main {
 		tipoTrabajoDAO.persist(tipoTrabajo1);
 		tipoTrabajoDAO.persist(tipoTrabajo2);
 		tipoTrabajoDAO.persist(tipoTrabajo3);
-		lugarDAO.persist(lugar);
+
+
+		Iterator<Lugar> itlugares = lugares.iterator();
+
+		while (itlugares.hasNext()) {
+			Lugar lugar = (Lugar) itlugares.next();
+			lugarDAO.persist(lugar);
+		}
 
 		Iterator<Usuario> itp2 = usuarios.iterator();
 
@@ -99,27 +114,24 @@ public class Main {
 			trabajoDAO.persist(trabajo);
 		}
 
+		System.out.println("Finalizado");
 
-		System.out.println(lugar.toString());
-		System.out.println(tematica1.toString());
-		System.out.println(tematica2.toString());
-		System.out.println(tipoTrabajo1.toString());
 
-		Iterator<Trabajo> its = trabajos.iterator();
+		Iterator<Trabajo> itevaluadores = trabajos.iterator();
+		Set<Usuario> evaluadores = trabajoDAO.evaluadoresAsignables(itevaluadores.next());
 
-		while (its.hasNext()) {
-			Trabajo trabajo = its.next();
-			System.out.println(trabajo.toString());
-		}
-		
-		Iterator<Usuario> its2 = usuarios.iterator();
+		Iterator<Usuario> itevaluadores2 = evaluadores.iterator();
 
-		while (its2.hasNext()) {
-			Usuario usuario = its2.next();
+		while (itevaluadores2.hasNext()) {
+			Usuario usuario = (Usuario) itevaluadores2.next();
 			System.out.println(usuario.toString());
 		}
 
 
-		System.out.println("Finalizado");
+//		List<Trabajo>query = usuarioDAO.findAllTrabajosEnEvaluacion(1);
+//		for (int i = 0; i < query.size(); i++) {
+//			System.out.println(query.get(i).toString());
+//		}
+
 	}
 }
