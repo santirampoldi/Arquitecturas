@@ -5,7 +5,9 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -13,8 +15,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Lugar {
 
-	@Id
-	@GeneratedValue
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@Column(nullable = false)
@@ -23,13 +24,17 @@ public class Lugar {
 	@Column(nullable = false)
 	private String ciudad;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn
 	Set<Usuario>trabajadores;
 
 	public Lugar(String nombre, String ciudad) {
 		this.nombre = nombre;
 		this.ciudad = ciudad;
+		this.trabajadores = new HashSet<Usuario>();
+	}
+	
+	public Lugar() {
 		this.trabajadores = new HashSet<Usuario>();
 	}
 

@@ -39,11 +39,6 @@ public class LugarDAO extends BaseJpaDAO<Lugar, Integer> {
 	}
 
 	@Override
-	public boolean delete(Integer id) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public List findAll() {
 		throw new UnsupportedOperationException();
 	}

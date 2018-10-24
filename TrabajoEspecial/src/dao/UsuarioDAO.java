@@ -1,10 +1,13 @@
 package dao;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import entidades.EMF;
+import entidades.Trabajo;
 import entidades.Usuario;    
 
 public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
@@ -49,9 +52,22 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 		return true;
 	}
 
-//	@Override
-//	public List findAll() {
-//		throw new UnsupportedOperationException();
-//	}
+	public List<Trabajo> findAllTrabajosEnEvaluacion(Integer id){
+		EntityManager entityManager = EMF.createEntityManager();
+		Usuario user = this.findById(id);
+		if(user != null) {
+			Query query = entityManager.createQuery("SELECT t FROM Trabajo t JOIN evaluador_trabajo et ON t.id = et.trabajo_id WHERE et.evaluador_id = :id");
+			query.setParameter("id", id);
+			if (!query.getResultList().isEmpty()) {
+				return query.getResultList();	
+			}
+		}
+		throw new UnsupportedOperationException();
+	}
+
+	//	@Override
+	//	public List findAll() {
+	//		throw new UnsupportedOperationException();
+	//	}
 
 }

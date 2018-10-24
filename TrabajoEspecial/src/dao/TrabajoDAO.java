@@ -2,6 +2,7 @@ package dao;
 
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -40,17 +41,17 @@ public class TrabajoDAO extends BaseJpaDAO<Trabajo, Integer> {
 		entityManager.close();
 		return trabajo;
 	}
-	
+
 	public Set<Usuario> evaluadoresAsignables(Trabajo t) {
 		Set<Usuario> retorno = new HashSet<Usuario>();
-		
-		
+
+
 		return retorno;
 	}
 
-//	@Override
-//	public List findAll() {
-//		throw new UnsupportedOperationException();
-//	}
+	@Override
+	public List findAll() {
+		throw new UnsupportedOperationException();
+	}
 
 }

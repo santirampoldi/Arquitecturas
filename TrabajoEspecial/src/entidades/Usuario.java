@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -14,6 +15,8 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Usuario {
+
+	//--------------Atributos de clase--------------
 
 	@Id
 	private int dni;
@@ -28,41 +31,62 @@ public class Usuario {
 	@JoinColumn
 	private Lugar lugar;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinColumn
 	Set<Tematica>temas;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "evaluador_trabajo",
 			joinColumns = { @JoinColumn(name = "evaluador_id") },
 			inverseJoinColumns = { @JoinColumn(name = "trabajo_id") }
 			)
-	Set<Trabajo> trabajos;
+	private Set<Trabajo> trabajosEvaluacion;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "autor_trabajo",
+			joinColumns = { @JoinColumn(name = "autor_id") },
+			inverseJoinColumns = { @JoinColumn(name = "trabajo_id") }
+			)
+	private Set<Trabajo> trabajosInvestigacion;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "evaluador_trabajoPendiente",
+			joinColumns = { @JoinColumn(name = "evaluador_id") },
+			inverseJoinColumns = { @JoinColumn(name = "trabajoPendiente_id") }
+			)
+	private Set<Trabajo> trabajosPendientes;
+
+	//--------------Constructor--------------
 
 	public Usuario(int dni, String nombre, String apellido, Lugar lugar) {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.lugar = lugar;
-		this.trabajos = new HashSet<Trabajo>();
 		this.temas = new HashSet<Tematica>();
+		this.trabajosInvestigacion = new HashSet<Trabajo>();
+		this.trabajosPendientes = new HashSet<Trabajo>();
+		this.trabajosEvaluacion = new HashSet<Trabajo>();
 	}
-	
-	public Usuario(int dni, String nombre, String apellido) {
-		this.dni = dni;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.trabajos = new HashSet<Trabajo>();
+
+	public Usuario() {
 		this.temas = new HashSet<Tematica>();
+		this.trabajosInvestigacion = new HashSet<Trabajo>();
+		this.trabajosPendientes = new HashSet<Trabajo>();
+		this.trabajosEvaluacion = new HashSet<Trabajo>();
 	}
+
+	//--------------toString--------------
 
 	@Override
 	public String toString() {
 		String tr = "";
-		if (!this.trabajos.isEmpty()) {
-			tr += ", trabajos = ";
-			for (Trabajo trabajo : this.trabajos) {
+		if (!this.trabajosInvestigacion.isEmpty()) {
+			tr += ", trabajos de investigacion = ";
+			for (Trabajo trabajo : this.trabajosInvestigacion) {
 				tr += trabajo.getNombre() + ", ";
 				tr += trabajo.getTipo().getNombre() + ".  ";
 			}	
@@ -80,28 +104,68 @@ public class Usuario {
 		return retorno;
 	}
 
+	//--------------Getters y setters--------------
 
+	public int getDni() {
+		return dni;
+	}
 
-	public int getDni() {return dni;}
+	public void setDni(int dni) {
+		this.dni = dni;
+	}
 
-	public void setDni(int dni) {this.dni = dni;}
+	public String getNombre() {
+		return nombre;
+	}
 
-	public String getNombre() {return nombre;}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-	public void setNombre(String nombre) {this.nombre = nombre;}
+	public String getApellido() {
+		return apellido;
+	}
 
-	public String getApellido() {return apellido;}
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
 
-	public void setApellido(String apellido) {this.apellido = apellido;}
+	public Lugar getLugar() {
+		return lugar;
+	}
 
-	public Lugar getLugar() {return lugar;}
+	public void setLugar(Lugar lugar) {
+		this.lugar = lugar;
+	}
 
-	public void setLugar(Lugar lugar) {this.lugar = lugar;}
+	public void setTrabajosInvestigacion(Set<Trabajo> trabajosInvestigacion) {
+		this.trabajosInvestigacion.addAll(trabajosInvestigacion);
+	}
 
-	public Set<Trabajo> getTrabajos() {return this.trabajos;}
+	public Set<Trabajo> getTrabajosInvestigacion() {
+		return this.trabajosInvestigacion;
+	}
 
-	public void setTrabajos(Set<Trabajo> trabajos) {this.trabajos = trabajos;}
+	public void setTrabajoInvestigacion(Trabajo trabajo) {
+		this.trabajosInvestigacion.add(trabajo);
+	}
 
-	public void addTrabajo(Trabajo trabajo) {this.trabajos.add(trabajo);}
+	public Set<Trabajo> getTrabajosEvaluacion() {
+		return this.trabajosEvaluacion;
+	}
+
+	public void setTrabajoEvaluacion(Trabajo trabajo) {
+		this.trabajosEvaluacion.add(trabajo);
+	}
+
+	public Set<Trabajo> getTrabajosPendientes() {
+		return this.trabajosPendientes;
+	}
+
+	public void setTrabajoPendiente(Trabajo trabajo) {
+		this.trabajosPendientes.add(trabajo);
+	}
+
+	//--------------Controles y metodos de clase--------------
 
 }

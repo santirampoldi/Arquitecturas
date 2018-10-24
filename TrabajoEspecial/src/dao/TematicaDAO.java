@@ -38,10 +38,6 @@ public class TematicaDAO extends BaseJpaDAO<Tematica, Integer> {
 		return tematica;
 	}
 
-	@Override
-	public boolean delete(Integer id) {
-		throw new UnsupportedOperationException();
-	}
 
 	@Override
 	public List findAll() {

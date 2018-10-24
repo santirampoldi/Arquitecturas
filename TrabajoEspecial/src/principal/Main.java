@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import dao.*;
@@ -116,7 +117,6 @@ public class Main {
 		System.out.println("Finalizado");
 
 
-
 		Iterator<Trabajo> itevaluadores = trabajos.iterator();
 		Set<Usuario> evaluadores = trabajoDAO.evaluadoresAsignables(itevaluadores.next());
 
@@ -126,5 +126,12 @@ public class Main {
 			Usuario usuario = (Usuario) itevaluadores2.next();
 			System.out.println(usuario.toString());
 		}
+
+
+//		List<Trabajo>query = usuarioDAO.findAllTrabajosEnEvaluacion(1);
+//		for (int i = 0; i < query.size(); i++) {
+//			System.out.println(query.get(i).toString());
+//		}
+
 	}
 }
