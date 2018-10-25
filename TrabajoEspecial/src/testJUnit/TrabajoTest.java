@@ -2,9 +2,13 @@ package testJUnit;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import static org.junit.Assert.*;
+
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import entidades.Lugar;
 import entidades.Tematica;
 import entidades.TipoTrabajo;
@@ -71,8 +75,8 @@ public class TrabajoTest {
 	}
 	
 	
-	@BeforeClass
-	public static void testCreateTrabajo() {		
+	@Before
+	public void testCreateTrabajo() {		
 		trabajo = new Trabajo("Desmitificando la IA", tipoTrabajo, autores, tematicas);
 		assertNotNull(trabajo);
 	}

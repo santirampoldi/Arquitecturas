@@ -173,7 +173,7 @@ public class Usuario {
 		return false;
 	}
 
-	private boolean addTrabajoEvaluacion(Trabajo trabajo) {
+	public boolean addTrabajoEvaluacion(Trabajo trabajo) {
 		if(this.trabajosEvaluacion.size() >= 3 ) {
 			return this.addTrabajoPendiente(trabajo);
 		}

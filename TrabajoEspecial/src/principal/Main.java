@@ -123,7 +123,6 @@ public class Main {
 			trabajoDAO.persist(trabajo);
 		}
 
-		System.out.println("Finalizada creacion de la BBDD");
 
 		//		----------------Mostrar datos de un usuario(Item D.i)----------------
 
@@ -149,24 +148,22 @@ public class Main {
 
 		//		----------------Verificar revisiones en rango de fecha(Item D.iii)----------------
 
-		//		Trabajo tra = new Trabajo("PythonEnRango", tipoTrabajo1);
-		//		Usuario usu = new Usuario(203, "Santiago", "Rampoldi", lugares.iterator().next());
-		//		trabajoDAO.persist(tra);
-		//		usuarioDAO.persist(usu);
-		//		Evaluacion e = new Evaluacion(tra, usu, "Buen trabajo");
-		//		Calendar fecha = Calendar.getInstance();
-		//		fecha.set(2017, 3, 1);
-		//		//e.setFecha(fecha); Esta linea cambia la fecha para que quede fuera del rango
-		//		evaluacionDAO.persist(e);
-		//		Calendar desde = Calendar.getInstance();
-		//		desde.set(2018, 0, 1);
-		//		Calendar hasta = Calendar.getInstance();
-		//		hasta.set(2018, 11, 31);
-		//
-		//		List<Trabajo> resultado = usuarioDAO.findAllTrabajosInvestigacionEnRango(203, desde, hasta);
-		//		for (int i = 0; i < resultado.size(); i++) {
-		//			System.out.println(resultado.get(i).getNombre());
-		//		}
+//				Trabajo tra = new Trabajo("PythonEnRango", tipoTrabajo1);
+//				Usuario usu = new Usuario(203, "Santiago", "Rampoldi", lugares.iterator().next());
+//				trabajoDAO.persist(tra);
+//				usuarioDAO.persist(usu);
+//				Evaluacion e = new Evaluacion(tra, usu, "Buen trabajo");
+//				
+//				evaluacionDAO.persist(e);
+//				Calendar desde = Calendar.getInstance();
+//				desde.set(2018, 0, 1);
+//				Calendar hasta = Calendar.getInstance();
+//				hasta.set(2018, 11, 31);
+//		
+//				List<Trabajo> resultado = usuarioDAO.findAllTrabajosInvestigacionEnRango(203, desde, hasta);
+//				for (int i = 0; i < resultado.size(); i++) {
+//					System.out.println(resultado.get(i).getNombre());
+//				}
 
 
 		//		----------------Verificar trabajos enviados de autor(Item D.iv)----------------
@@ -202,6 +199,46 @@ public class Main {
 		//		}
 
 
+		//		----------------Verificar revisiones en rango de fecha(Item F)----------------
+
+		Set <Usuario> autores = new HashSet<Usuario>();
+		Set <Usuario> autores1 = new HashSet<Usuario>();
+		Set <Tematica> tematicas2 = new HashSet<Tematica>();
+		
+		Tematica html = new Tematica("html", false);
+		
+
+		Usuario usu = new Usuario(203, "Santiago", "Rampoldi", lugares.iterator().next());
+		Usuario usu2 = new Usuario(666, "Agustin", "Meliendrez", lugares.iterator().next());
+		Usuario usu3 = new Usuario(777, "John", "Doe", lugares.iterator().next());
+
+		autores.add(usu);
+		autores.add(usu2);
+		autores1.add(usu3);
+		
+		
+		Trabajo tra = new Trabajo("PythonEnRango", tipoTrabajo1, autores, tematicas);
+		Trabajo tra1 = new Trabajo("PhpExperto", tipoTrabajo3, autores1, tematicas2);
+		Trabajo tra2 = new Trabajo("java", tipoTrabajo2, autores, tematicas);
+
+
+		usu.addTrabajoInvestigacion(tra);
+		usu3.addTrabajoEvaluacion(tra);
+
+		tematicaDAO.persist(html);
+
+		trabajoDAO.persist(tra);
+		trabajoDAO.persist(tra1);
+		trabajoDAO.persist(tra2);
+		usuarioDAO.persist(usu);
+		usuarioDAO.persist(usu2);
+		usuarioDAO.persist(usu3);
+	
+		
+		List<Trabajo> resultado = usuarioDAO.findAllTrabajosAutorRevisorTema(usu.getDni(), usu3.getDni(), tematica1.getId());
+		for (int i = 0; i < resultado.size(); i++) {
+			System.out.println(resultado.get(i).getNombre());
+		}
 
 	}
 }
