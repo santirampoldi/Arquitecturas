@@ -10,33 +10,32 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import entidades.Lugar;
-import entidades.Usuario;
 
 public class UsuarioTest {
 	
-	private Usuario usuario;
-	private Lugar uncpba;
+	private static Usuario usuario;
+	private static Lugar uncpba;
 	
 	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		System.out.println("Usuario -> setupBeforeClass");
-	}
+//	@BeforeClass
+//	public static void setUpBeforeClass() throws Exception {
+//		System.out.println("Usuario -> setupBeforeClass");
+//	}
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	System.out.println("Usuario -> tearDownAfterClass");
-	}
-
-	@Before
-	public void setUp() throws Exception {
-		System.out.println("Usuario -> Usuario");
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	System.out.println("Usuario -> TearDownUsuario");
-	}
+//	@AfterClass
+//	public static void tearDownAfterClass() throws Exception {
+//	System.out.println("Usuario -> tearDownAfterClass");
+//	}
+//
+//	@Before
+//	public void setUp() throws Exception {
+//		System.out.println("Usuario -> Usuario");
+//	}
+//
+//	@After
+//	public void tearDown() throws Exception {
+//	System.out.println("Usuario -> TearDownUsuario");
+//	}
 	/**
 	 *  
 	 */
@@ -45,17 +44,20 @@ public class UsuarioTest {
 	System.out.println("Usuario -> TestUsuario");
 	}
 
-	@Before
-	public void testCreateUsuario() {
-		this.uncpba = new Lugar("uncpba", "Tandil");
-		this.usuario = new Usuario(36626800, "Agustin", "Meliendrez", uncpba);
+	@BeforeClass
+	public static void testCreateUsuario() {
 		System.out.println("Usuario -> testCreateUsuario");
+		uncpba = new Lugar("uncpba", "Tandil");
+		assertNotNull(uncpba);
+		usuario = new Usuario(36626800, "Agustin", "Meliendrez", uncpba);
+		assertNotNull(usuario);
 	}
 
 	@Test
 	public void testGetDni() {
 		int dni = this.usuario.getDni();
-		System.out.println("Usuario -> testGetDni -> "+ dni);		
+		System.out.println("Usuario -> testGetDni -> "+ dni);	
+		assertEquals(36626800, dni);
 	}
 	
 	@Test
@@ -65,27 +67,27 @@ public class UsuarioTest {
 		System.out.println("Usuario -> testGetNombreCompleto -> " + apellido + ", " + nombre);		
 	}
 	
-	@Test
-	public void testGetLugar() {
-		Lugar lugar = this.usuario.getLugar();
-		String nombreLugar = lugar.getNombre();
-		System.out.println("Usuario -> testGetLugar -> " + nombreLugar);		
-	}
-
-	@Test
-	public void testSetInicio() {
-		System.out.println("Usuario -> SetInicio");
-	}
-
-	@Test
-	public void testGetFin() {
-		//fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetFin() {
-		//fail("Not yet implemented");
-	}
+//	@Test
+//	public void testGetLugar() {
+//		Lugar lugar = this.usuario.getLugar();
+//		String nombreLugar = lugar.getNombre();
+//		System.out.println("Usuario -> testGetLugar -> " + nombreLugar);		
+//	}
+//
+//	@Test
+//	public void testSetInicio() {
+//		System.out.println("Usuario -> SetInicio");
+//	}
+//
+//	@Test
+//	public void testGetFin() {
+//		//fail("Not yet implemented");
+//	}
+//
+//	@Test
+//	public void testSetFin() {
+//		//fail("Not yet implemented");
+//	}
 	
 	
 }
