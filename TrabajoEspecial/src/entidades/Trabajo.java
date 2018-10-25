@@ -50,6 +50,14 @@ public class Trabajo {
 		this.evaluadores = new HashSet<Usuario>();
 	}
 
+	public Trabajo(String nombre, TipoTrabajo tipo) {
+		this.nombre = nombre;
+		this.tipo = tipo;
+		this.temas = new HashSet<Tematica>();
+		this.autores = new HashSet<Usuario>();
+		this.evaluadores = new HashSet<Usuario>();
+	}
+
 	public Trabajo() {
 		this.temas = new HashSet<Tematica>();
 		this.autores = new HashSet<Usuario>();

@@ -11,9 +11,10 @@
 		<!-- <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider> -->
 
 		<class>entidades.EMF</class>
+		<class>entidades.Evaluacion</class>
+		<class>entidades.Lugar</class>
 		<class>entidades.Tematica</class>
 		<class>entidades.TipoTrabajo</class>
-		<class>entidades.Lugar</class>
 		<class>entidades.Trabajo</class>
 		<class>entidades.Usuario</class>
 

@@ -84,6 +84,7 @@ public class Main {
 		TipoTrabajoDAO tipoTrabajoDAO = TipoTrabajoDAO.getInstance();
 		UsuarioDAO usuarioDAO = UsuarioDAO.getInstance();
 		TrabajoDAO trabajoDAO = TrabajoDAO.getInstance();
+		EvaluacionDAO evaluacionDAO = EvaluacionDAO.getInstance();
 
 		tipoTrabajoDAO.persist(tipoTrabajo1);
 		tipoTrabajoDAO.persist(tipoTrabajo2);
@@ -116,27 +117,26 @@ public class Main {
 
 		System.out.println("Finalizado");
 
-
-		Iterator<Trabajo> itevaluadores = trabajos.iterator();
-		Set<Usuario> evaluadores = trabajoDAO.evaluadoresAsignables(itevaluadores.next());
-
-		Iterator<Usuario> itevaluadores2 = evaluadores.iterator();
-
-		while (itevaluadores2.hasNext()) {
-			Usuario usuario = (Usuario) itevaluadores2.next();
-			System.out.println(usuario.toString());
-		}
+		//		Trabajo tra = new Trabajo("Conicet", tipoTrabajo1);
+		//		Usuario usu = new Usuario(200, "Santiago", "Rampoldi", lugares.iterator().next());
+		//		trabajoDAO.persist(tra);
+		//		usuarioDAO.persist(usu);
+		//		Evaluacion e = new Evaluacion(tra, usu, "Buen trabajo");
+		//		evaluacionDAO.persist(e);
+		//		System.out.println(evaluacionDAO.findById(1).toString());
 
 
-//		List<Trabajo>query = usuarioDAO.findAllTrabajosEnEvaluacion(1);
-//		for (int i = 0; i < query.size(); i++) {
-//			System.out.println(query.get(i).toString());
-//		}
-		
-		List<Usuario>query2 = usuarioDAO.findAllUsuarios();
-		for (int i = 0; i < query2.size(); i++) {
-			System.out.println(query2.get(i).toString());
-		}
+		//		Iterator<Trabajo> itevaluadores = trabajos.iterator();
+		//		Set<Usuario> evaluadores = trabajoDAO.evaluadoresAsignables(itevaluadores.next());
+		//
+		//		Iterator<Usuario> itevaluadores2 = evaluadores.iterator();
+		//
+		//		while (itevaluadores2.hasNext()) {
+		//			Usuario usuario = (Usuario) itevaluadores2.next();
+		//			System.out.println(usuario.toString());
+		//		}
+
+
 
 	}
 }

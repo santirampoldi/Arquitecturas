@@ -45,19 +45,23 @@ public class Usuario {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
-			name = "autor_trabajo",
-			joinColumns = { @JoinColumn(name = "autor_id") },
-			inverseJoinColumns = { @JoinColumn(name = "trabajo_id") }
-			)
-	private Set<Trabajo> trabajosInvestigacion;
-
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(
 			name = "evaluador_trabajoPendiente",
 			joinColumns = { @JoinColumn(name = "evaluador_id") },
 			inverseJoinColumns = { @JoinColumn(name = "trabajoPendiente_id") }
 			)
 	private Set<Trabajo> trabajosPendientes;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinColumn
+	private Set<Evaluacion> evaluaciones;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "autor_trabajo",
+			joinColumns = { @JoinColumn(name = "autor_id") },
+			inverseJoinColumns = { @JoinColumn(name = "trabajo_id") }
+			)
+	private Set<Trabajo> trabajosInvestigacion;
 
 	//--------------Constructor--------------
 
