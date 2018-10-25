@@ -38,8 +38,6 @@ public class Evaluacion {
 
 	//--------------Constructor--------------
 
-
-
 	public Evaluacion() {
 	}
 
@@ -85,6 +83,14 @@ public class Evaluacion {
 
 	public int getId() {
 		return id;
+	}
+
+	public Calendar getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Calendar fecha) {
+		this.fecha = fecha;
 	}
 
 }

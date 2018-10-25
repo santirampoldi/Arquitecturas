@@ -5,8 +5,8 @@
 
 	<persistence-unit name="TrabajoEspecial">
 		<description>Contexto de persistencia con Apache Derby, Hibernate y entidades JPA definidas mediante anotaciones</description>
+
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<!-- <provider>org.hibernate.ejb.HibernatePersistence</provider> -->
 		<!-- <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
 		<!-- <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider> -->
 
@@ -19,17 +19,16 @@
 		<class>entidades.Usuario</class>
 
 		<properties>
-			<!-- Propiedades de configuracion de JDBC para Apache Derby -->
-			<!-- <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" /> -->
-			<!-- <property name="javax.persistence.jdbc.url" value="jdbc:derby:CACIC2018DB;create=true" /> -->
 			<!-- Propiedades de configuracion de JDBC para MySQL -->
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/CACIC2018DB?CreateDatabaseIfNotExist=true" />
+			<!-- a) Si la base de datos no existe, se crea -->
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/CACIC2018DB?CreateDatabaseIfNotExist=true" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="" />
 
-			<!-- Propiedad para la generacion automatica del esquema de base de datos -->
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<!-- g) Drop y create de la base de datos en cada inicializacion -->
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 			<!-- <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/> -->
 			<!-- <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/> -->
 		</properties>

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import entidades.EMF;
 import entidades.Trabajo;
@@ -49,9 +50,28 @@ public class TrabajoDAO extends BaseJpaDAO<Trabajo, Integer> {
 		return retorno;
 	}
 
-	@Override
-	public List findAll() {
-		throw new UnsupportedOperationException();
+	public Trabajo getTrabajo(Integer id) {
+		EntityManager entityManager = EMF.createEntityManager();
+		Query query = entityManager.createNativeQuery("SELECT * FROM trabajo WHERE id = :id", Trabajo.class);
+		query.setParameter("id", id);
+		entityManager.close();
+		return (Trabajo) query.getSingleResult();
+	}
+
+	public List<Trabajo> findAll() {
+		EntityManager entityManager = EMF.createEntityManager();
+		Query query = entityManager.createNativeQuery("SELECT * FROM trabajo", Trabajo.class);
+		entityManager.close();
+		return query.getResultList();
+	}
+
+	public boolean delete(Integer id) {
+		Trabajo trabajo = this.findById(id);		
+		if(trabajo != null) {
+			entityManager.remove(trabajo);
+			return true;
+		}
+		return false;
 	}
 
 }

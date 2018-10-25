@@ -39,7 +39,7 @@ public class TrabajoTest {
 
 		autor1 = new Usuario(36626800, "Agustin", "Meliendrez", uncpbaFCH);
 		assertNotNull(autor1);
-		autor2 = new Usuario(39778290, "Rampoldi", "Santiago", uncpbaFCE); // Poner documento de santi
+		autor2 = new Usuario(41313351, "Rampoldi", "Santiago", uncpbaFCE);
 		assertNotNull(autor2);
 		autores = new HashSet<Usuario>();
 		autores.add(autor1);

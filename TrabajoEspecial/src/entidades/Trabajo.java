@@ -43,9 +43,14 @@ public class Trabajo {
 	//--------------Constructor--------------
 
 	public Trabajo(String nombre, TipoTrabajo tipo, Set<Usuario> autores, Set<Tematica> tematicas) {
+		if (autores.size() <= 3) {
+			this.autores = autores;	
+		}
+		else {
+			this.autores = new HashSet<Usuario>();
+		}
 		this.nombre = nombre;
 		this.tipo = tipo;
-		this.autores = autores;
 		this.temas = tematicas;
 		this.evaluadores = new HashSet<Usuario>();
 	}
@@ -109,16 +114,18 @@ public class Trabajo {
 		return autores;
 	}
 
-	public void setAutores(HashSet<Usuario> autores) {
-		this.autores = autores;
+	public void setAutor(Usuario autor) {
+		if (this.autores.size() <= 2) {
+			this.autores.add(autor);	
+		}
 	}
 
 	public Set<Tematica> getTemas() {
 		return temas;
 	}
 
-	public void setTemas(HashSet<Tematica> temas) {
-		this.temas = temas;
+	public void setTemas(Tematica tema) {
+		this.temas.add(tema);
 	}
 
 	public int getId() {

@@ -50,7 +50,7 @@ public class Usuario {
 			inverseJoinColumns = { @JoinColumn(name = "trabajoPendiente_id") }
 			)
 	private Set<Trabajo> trabajosPendientes;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinColumn
 	private Set<Evaluacion> evaluaciones;
@@ -103,8 +103,8 @@ public class Usuario {
 				te += tematica.getNombre() + ".  ";
 			}	
 		}
-		String retorno = "Usuario [dni = " + this.dni + ", nombre = " + this.nombre + ", apellido = " + this.apellido + ", lugar = " 
-				+ this.lugar.getNombre() + te + tr + "]"; 
+		String retorno = "Usuario [dni = " + this.dni + ", nombre = " + this.nombre + ", apellido = " + this.apellido +
+				", lugar = " + this.lugar.getNombre() + te + tr + "]"; 
 		return retorno;
 	}
 
@@ -142,34 +142,95 @@ public class Usuario {
 		this.lugar = lugar;
 	}
 
-	public void setTrabajosInvestigacion(Set<Trabajo> trabajosInvestigacion) {
-		this.trabajosInvestigacion.addAll(trabajosInvestigacion);
-	}
-
 	public Set<Trabajo> getTrabajosInvestigacion() {
 		return this.trabajosInvestigacion;
-	}
-
-	public void setTrabajoInvestigacion(Trabajo trabajo) {
-		this.trabajosInvestigacion.add(trabajo);
 	}
 
 	public Set<Trabajo> getTrabajosEvaluacion() {
 		return this.trabajosEvaluacion;
 	}
 
-	public void setTrabajoEvaluacion(Trabajo trabajo) {
-		this.trabajosEvaluacion.add(trabajo);
-	}
-
 	public Set<Trabajo> getTrabajosPendientes() {
 		return this.trabajosPendientes;
 	}
 
-	public void setTrabajoPendiente(Trabajo trabajo) {
-		this.trabajosPendientes.add(trabajo);
+	public void setTema(Tematica t) {
+		this.temas.add(t);
+	}
+
+	public Set<Tematica> getTemas() {
+		return this.temas;
 	}
 
 	//--------------Controles y metodos de clase--------------
+
+	public boolean addTrabajoInvestigacion(Trabajo trabajo) {
+		if(!this.trabajosPendientes.contains(trabajo) && !this.trabajosEvaluacion.contains(trabajo)) {
+			trabajo.setAutor(this);
+			this.trabajosInvestigacion.add(trabajo);
+			return true;
+		}
+		return false;
+	}
+
+	private boolean addTrabajoEvaluacion(Trabajo trabajo) {
+		if(this.trabajosEvaluacion.size() >= 3 ) {
+			return this.addTrabajoPendiente(trabajo);
+		}
+		else {
+			this.trabajosEvaluacion.add(trabajo);
+			return true;
+		}
+	}
+
+	public boolean addTrabajoPendiente(Trabajo trabajo) {
+		if (this.esEvaluadorApto(trabajo)) {
+			this.trabajosPendientes.add(trabajo);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean aceptarTrabajo(Trabajo trabajo) {
+		if(this.trabajosPendientes.contains(trabajo)) {
+			this.trabajosPendientes.remove(trabajo);			
+			return this.addTrabajoEvaluacion(trabajo);
+		}
+		return false;
+	}
+
+	public void rechazarTrabajo(Trabajo trabajo) {
+		this.trabajosPendientes.remove(trabajo);
+	}
+
+	public boolean calificarTrabajo(Trabajo trabajo, String observacion) {
+		if(this.trabajosEvaluacion.contains(trabajo)) {
+			new Evaluacion(trabajo, this, observacion);
+			return true;
+		}
+		return false;
+	}
+
+	private boolean esEvaluadorApto(Trabajo t) {
+		if	(!this.trabajosInvestigacion.contains(t)) {
+			boolean mismoLugarTrabajo = false;
+			for(Usuario u: t.getAutores()) {
+				if(u.getLugar().equals(this.lugar))
+					mismoLugarTrabajo = true;
+			}
+			if(!mismoLugarTrabajo) {
+				Set<Tematica> clavesTrabajo = t.getTemas();
+				if(t.getTipo().getCondicion()) 
+					return this.temas.containsAll(clavesTrabajo);
+				else {
+					for(Tematica e: clavesTrabajo) {
+						if(this.temas.contains(e)) 
+							return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 
 }

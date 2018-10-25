@@ -12,10 +12,21 @@ public class TipoTrabajo {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	@Column (nullable = false)
 	private String nombre;
+	
+	@Column(nullable = false)
+	private boolean condEvaluacion;
+	//Si es poster(0), el evaluador solo debe evaluar un tema. En el caso contrario (1) todos los temas.
 
 	public TipoTrabajo(String nombre) {
+		if (nombre.equals("Poster")) {
+			this.condEvaluacion = false;
+		}
+		else {
+			this.condEvaluacion = true;
+		}
 		this.nombre = nombre;
 	}
 	
@@ -37,6 +48,10 @@ public class TipoTrabajo {
 	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public boolean getCondicion(){
+		return this.condEvaluacion;
 	}
 
 }
