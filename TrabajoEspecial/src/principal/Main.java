@@ -132,6 +132,11 @@ public class Main {
 //		for (int i = 0; i < query.size(); i++) {
 //			System.out.println(query.get(i).toString());
 //		}
+		
+		List<Usuario>query2 = usuarioDAO.findAllUsuarios();
+		for (int i = 0; i < query2.size(); i++) {
+			System.out.println(query2.get(i).toString());
+		}
 
 	}
 }
