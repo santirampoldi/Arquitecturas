@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -56,12 +57,26 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 		EntityManager entityManager = EMF.createEntityManager();
 		Usuario user = this.findById(id);
 		if(user != null) {
-			Query query = entityManager.createQuery("SELECT t FROM Trabajo t JOIN evaluador_trabajo et ON t.id = et.trabajo_id WHERE et.evaluador_id = :id");
+			Query query = entityManager.createNativeQuery(("SELECT t.* FROM trabajo t JOIN evaluador_trabajo et ON t.id = et.trabajo_id WHERE et.evaluador_id = :id"));
 			query.setParameter("id", id);
 			if (!query.getResultList().isEmpty()) {
 				return query.getResultList();	
 			}
 		}
+		System.out.println("La consulta no devolvio ningun resultado");
+		throw new UnsupportedOperationException();
+	}
+
+	public List<Usuario> findAllUsuarios(){
+		EntityManager entityManager = EMF.createEntityManager();
+		List<Usuario>retorno = new ArrayList<Usuario>();
+		Query query = entityManager.createNativeQuery("SELECT * FROM usuario", Usuario.class);
+		if (!query.getResultList().isEmpty()) {
+			retorno = query.getResultList();
+			System.out.println(retorno);
+			return retorno;
+		}
+		System.out.println("La consulta no devolvio ningun resultado");
 		throw new UnsupportedOperationException();
 	}
 
