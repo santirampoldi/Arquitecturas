@@ -1,41 +1,68 @@
 package testJUnit;
 
 import static org.junit.Assert.*;
-import dao.LugarDAO;
+
+import java.util.List;
+
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import dao.LugarDAO;
 import entidades.Lugar;
 
 public class LugarTest {
 	
 	private static LugarDAO lugarDAO;
 	private static Lugar lugar;
-	
+	private static Lugar lugarBBDD;
 	
 	@BeforeClass
 	public static void setUpEnviroment(){
-		lugarDAO = LugarDAO.getInstance();
-	}
+		System.out.println("LugarTest-> Comienza el test");
+		System.out.println("LugarTest-> Se prepara el ambiente");
 
-	@BeforeClass
-	public static void testCreateLugar() {
+		lugarDAO = LugarDAO.getInstance();
 		lugar = new Lugar("UNCPBA", "Tandil");
 		assertNotNull(lugar);
 		lugarDAO.persist(lugar);
-		lugarDAO.findAll();
-		
+		lugarBBDD = lugarDAO.getFirst();
+		assertNotNull(lugarBBDD);
 	}
 	
 	@Test
-	public void testGetCiudad() {
-		String ciudad = lugar.getCiudad();
-		assertEquals("Tandil", ciudad);
+	public void crearNuevoLugar(){
+		System.out.println("LugarTest-> se crea un nuevo lugar");
+
+		Lugar nuevoLugar = new Lugar("UBA", "Buenos Aires");
+		assertNotNull(nuevoLugar);
+		lugarDAO.persist(nuevoLugar);
+		int cantidadLugares = lugarDAO.getCantidadLugares();
+		assertEquals(2, cantidadLugares);
+	}
+
+	@Test
+	public void testCompararNombreLugar() {
+		System.out.println("LugarTest-> Se comprueba que el nombre sea correcto");
+		assertEquals("UNCPBA", lugarBBDD.getNombre());
 	}
 	
 	@Test
-	public void testGetLugar() {
-		String institucion = lugar.getNombre();
-		assertEquals("UNCPBA", institucion);
+	public void testCompararNombreLugarErroneo() {
+		System.out.println("LugarTest-> Se comprueba que el nombre sea incorrecto");
+		assertNotEquals("UNLP", lugarBBDD.getNombre());
+	}
+	
+	@Test
+	public void testCompararNombreCiudad() {
+		System.out.println("LugarTest-> Se comprueba que la ciudad sea correcto");
+		assertEquals("Tandil", lugarBBDD.getCiudad());
+	}
+	
+	@Test
+	public void testCompararNombreCiudadErroneo() {
+		System.out.println("LugarTest-> Se comprueba que la ciudad sea incorrecto");
+		assertNotEquals("La plata", lugarBBDD.getCiudad());
 	}
 	
 }

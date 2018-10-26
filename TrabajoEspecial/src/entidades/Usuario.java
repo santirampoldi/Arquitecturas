@@ -165,8 +165,7 @@ public class Usuario {
 	//--------------Controles y metodos de clase--------------
 
 	public boolean addTrabajoInvestigacion(Trabajo trabajo) {
-		if(!this.trabajosPendientes.contains(trabajo) && !this.trabajosEvaluacion.contains(trabajo) 
-				&& this.trabajosInvestigacion.size() <= 3 && !this.trabajosInvestigacion.contains(trabajo)) {
+		if(!this.trabajosPendientes.contains(trabajo) && !this.trabajosEvaluacion.contains(trabajo)) {
 			trabajo.setAutor(this);
 			this.trabajosInvestigacion.add(trabajo);
 			return true;
@@ -175,7 +174,7 @@ public class Usuario {
 	}
 
 	public boolean addTrabajoEvaluacion(Trabajo trabajo) {
-		if(this.trabajosEvaluacion.size() <= 3 ) {
+		if(this.trabajosEvaluacion.size() >= 3 ) {
 			return this.addTrabajoPendiente(trabajo);
 		}
 		else {

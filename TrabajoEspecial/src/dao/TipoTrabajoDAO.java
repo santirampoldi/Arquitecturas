@@ -1,9 +1,9 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityManager;
-
+import javax.persistence.Query;
 import entidades.EMF;
 import entidades.TipoTrabajo;    
 
@@ -39,8 +39,24 @@ public class TipoTrabajoDAO extends BaseJpaDAO<TipoTrabajo, Integer> {
 	}
 
 	@Override
-	public List findAll() {
+	public List<TipoTrabajo> findAll() {
+		EntityManager entityManager = EMF.createEntityManager();
+		List<TipoTrabajo>retorno = new ArrayList<TipoTrabajo>();
+		Query query = entityManager.createNativeQuery("SELECT * FROM tipotrabajo", TipoTrabajo.class);
+		if (!query.getResultList().isEmpty()) {
+			retorno = query.getResultList();
+			return retorno;
+		}
+		//System.out.println("La consulta no devolvio ningun resultado");
 		throw new UnsupportedOperationException();
+	}
+	
+	public TipoTrabajo getFirst(){
+		return findAll().get(0);
+	}
+	
+	public int getCantidadTiposTrabajo() {
+		return findAll().size()+0;
 	}
 
 }

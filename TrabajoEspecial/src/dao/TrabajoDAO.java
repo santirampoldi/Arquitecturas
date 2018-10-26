@@ -1,6 +1,7 @@
 package dao;
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import entidades.EMF;
+import entidades.TipoTrabajo;
 import entidades.Trabajo;
 import entidades.Usuario;    
 
@@ -56,12 +58,26 @@ public class TrabajoDAO extends BaseJpaDAO<Trabajo, Integer> {
 		entityManager.close();
 		return (Trabajo) query.getSingleResult();
 	}
-
+	
+	@Override
 	public List<Trabajo> findAll() {
 		EntityManager entityManager = EMF.createEntityManager();
+		List<Trabajo>retorno = new ArrayList<Trabajo>();
 		Query query = entityManager.createNativeQuery("SELECT * FROM trabajo", Trabajo.class);
-		entityManager.close();
-		return query.getResultList();
+		if (!query.getResultList().isEmpty()) {
+			retorno = query.getResultList();
+			return retorno;
+		}
+		//System.out.println("La consulta no devolvio ningun resultado");
+		throw new UnsupportedOperationException();
+	}
+	
+	public int getCantidadTrabajos() {
+		return findAll().size() + 0;
+	}
+	
+	public Trabajo getFirst(){
+		return findAll().get(0);
 	}
 
 	public boolean delete(Integer id) {
@@ -72,15 +88,4 @@ public class TrabajoDAO extends BaseJpaDAO<Trabajo, Integer> {
 		}
 		return false;
 	}
-	
-	public int getCantidadTrabajos(){
-		EntityManager entityManager = EMF.createEntityManager();
-		Query query = entityManager.createNativeQuery("SELECT * FROM trabajo", Trabajo.class);
-		entityManager.close();
-		if (!query.getResultList().isEmpty()) 
-			return query.getResultList().size();
-		else
-			return 0;
-	}
-
 }

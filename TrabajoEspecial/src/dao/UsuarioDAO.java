@@ -2,6 +2,7 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -67,7 +68,7 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 			List<Tematica> t = query.getResultList();
 			for (int i = 0; i < t.size(); i++) {
 				if (t.get(i).getTipo() == true) {
-					System.out.println(t.get(i).getId());
+//					System.out.println(t.get(i).getId());
 					return true;
 				}
 			}
@@ -88,7 +89,7 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 				return query.getResultList();
 			}
 		}
-		System.out.println("La consulta no devolvio ningun resultado");
+		//System.out.println("La consulta no devolvio ningun resultado");
 		return new ArrayList<Trabajo>();
 	}
 
@@ -106,7 +107,7 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 				return query.getResultList();
 			}
 		}
-		System.out.println("La consulta no devolvio ningun resultado");
+		//System.out.println("La consulta no devolvio ningun resultado");
 		entityManager.close();
 		return new ArrayList<Trabajo>();
 	}
@@ -132,7 +133,7 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 				return query.getResultList();
 			}
 		}
-		System.out.println("La consulta no devolvio ningun resultado");
+		//System.out.println("La consulta no devolvio ningun resultado");
 		return new ArrayList<Trabajo>();
 	}
 
@@ -142,11 +143,18 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 		Query query = entityManager.createNativeQuery("SELECT * FROM usuario", Usuario.class);
 		if (!query.getResultList().isEmpty()) {
 			retorno = query.getResultList();
-			System.out.println(retorno);
 			return retorno;
 		}
-		System.out.println("La consulta no devolvio ningun resultado");
+		//System.out.println("La consulta no devolvio ningun resultado");
 		throw new UnsupportedOperationException();
+	}
+	
+	public int getCantidadUsuarios(){
+		return findAllUsuarios().size()+0;
+	}
+	
+	public Usuario getFirst(){
+		return findAllUsuarios().get(0);
 	}
 
 	public List<Trabajo> findAllTrabajosInvestigacionEnRango(Integer id, Calendar desde, Calendar hasta){
@@ -165,7 +173,7 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 				return query.getResultList();
 			}
 		}
-		System.out.println("La consulta no devolvio ningun resultado");
+		//System.out.println("La consulta no devolvio ningun resultado");
 		return new ArrayList<Trabajo>();
 	}
 
@@ -173,6 +181,7 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 		EntityManager entityManager = EMF.createEntityManager();
 		Usuario autor = this.findById(idAutor);
 		Usuario evaluador = this.findById(idEvaluador);
+		List<Trabajo>retorno = new ArrayList<Trabajo>();
 		
 		TematicaDAO daoT = TematicaDAO.getInstance();
 		Tematica tema = daoT .findById(idTematica);
@@ -189,20 +198,11 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 			query.setParameter("idEvaluador", idEvaluador);
 			query.setParameter("idTematica", idTematica);
 			if (!query.getResultList().isEmpty()) {
-				return query.getResultList();
+				retorno = query.getResultList();
+				return retorno;
 			}
 		}
-		System.out.println("La consulta no devolvio ningun resultado");
+		//System.out.println("La consulta no devolvio ningun resultado");
 		return new ArrayList<Trabajo>();
-	}
-	
-	public int getCantidadUsuarios(){
-		EntityManager entityManager = EMF.createEntityManager();
-		Query query = entityManager.createNativeQuery("SELECT * FROM usuario", Usuario.class);
-		entityManager.close();
-		if (!query.getResultList().isEmpty()) 
-			return query.getResultList().size();
-		else
-			return 0;
 	}
 }

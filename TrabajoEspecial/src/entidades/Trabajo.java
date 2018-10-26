@@ -83,7 +83,7 @@ public class Trabajo {
 		String t = "";
 		if (!this.temas.isEmpty()) {
 			for (Tematica tematica : this.temas) {
-				a += tematica.getNombre() + ".  ";
+				t += tematica.getNombre() + ".  ";
 			}	
 		}
 
@@ -130,6 +130,14 @@ public class Trabajo {
 
 	public int getId() {
 		return id;
+	}
+	
+	public int getCantidadAutores() {
+		return autores.size();
+	}
+	
+	public int getCantidadTematicas() {
+		return temas.size();
 	}
 
 }

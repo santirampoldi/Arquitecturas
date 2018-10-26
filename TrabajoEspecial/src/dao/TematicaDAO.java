@@ -1,9 +1,9 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityManager;
-
+import javax.persistence.Query;
 import entidades.EMF;
 import entidades.Tematica;    
 
@@ -40,8 +40,24 @@ public class TematicaDAO extends BaseJpaDAO<Tematica, Integer> {
 
 
 	@Override
-	public List findAll() {
+	public List<Tematica> findAll() {
+		EntityManager entityManager = EMF.createEntityManager();
+		List<Tematica>retorno = new ArrayList<Tematica>();
+		Query query = entityManager.createNativeQuery("SELECT * FROM tematica", Tematica.class);
+		if (!query.getResultList().isEmpty()) {
+			retorno = query.getResultList();
+			return retorno;
+		}
+		//System.out.println("La consulta no devolvio ningun resultado");
 		throw new UnsupportedOperationException();
+	}
+	
+	public Tematica getFirst(){
+		return findAll().get(0);
+	}
+	
+	public int getCantidadTematicas() {
+		return findAll().size()+0;
 	}
 
 }

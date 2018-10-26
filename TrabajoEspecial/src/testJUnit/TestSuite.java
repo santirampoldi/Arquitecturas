@@ -8,10 +8,10 @@ import org.junit.runners.Suite;
 
 @Suite.SuiteClasses({
 	LugarTest.class,
-	UsuarioTest.class,
 	TematicaTest.class,
 	TipoTrabajoTest.class,
 	TrabajoTest.class,
+	UsuarioTest.class
 })
 
 public class TestSuite {

@@ -1,13 +1,11 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
 import entidades.EMF;
 import entidades.Lugar;    
-import entidades.Usuario;
 
 public class LugarDAO extends BaseJpaDAO<Lugar, Integer> {
 
@@ -39,20 +37,27 @@ public class LugarDAO extends BaseJpaDAO<Lugar, Integer> {
 		entityManager.close();
 		return lugar;
 	}
+	
 
 	@Override
-	public List findAll() {
+	public List<Lugar> findAll() {
+		EntityManager entityManager = EMF.createEntityManager();
+		List<Lugar>retorno = new ArrayList<Lugar>();
+		Query query = entityManager.createNativeQuery("SELECT * FROM lugar", Lugar.class);
+		if (!query.getResultList().isEmpty()) {
+			retorno = query.getResultList();
+			return retorno;
+		}
+		//System.out.println("La consulta no devolvio ningun resultado");
 		throw new UnsupportedOperationException();
 	}
 	
 	public Lugar getFirst(){
-		EntityManager entityManager = EMF.createEntityManager();
-		Query query = entityManager.createNativeQuery("SELECT * FROM lugar", Lugar.class);
-		entityManager.close();
-		if (!query.getResultList().isEmpty()) 
-			return (Lugar)query.getSingleResult();
-		else
-			return null;
+		return findAll().get(0);
+	}
+	
+	public int getCantidadLugares() {
+		return findAll().size()+0;
 	}
 
 }
