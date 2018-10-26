@@ -45,8 +45,7 @@ public class TrabajoDAO extends BaseJpaDAO<Trabajo, Integer> {
 
 	public Set<Usuario> evaluadoresAsignables(Trabajo t) {
 		Set<Usuario> retorno = new HashSet<Usuario>();
-
-
+		//Falta implementar la evaluacion de que usuarios son asignables para los trabajos
 		return retorno;
 	}
 
@@ -72,6 +71,16 @@ public class TrabajoDAO extends BaseJpaDAO<Trabajo, Integer> {
 			return true;
 		}
 		return false;
+	}
+	
+	public int getCantidadTrabajos(){
+		EntityManager entityManager = EMF.createEntityManager();
+		Query query = entityManager.createNativeQuery("SELECT * FROM trabajo", Trabajo.class);
+		entityManager.close();
+		if (!query.getResultList().isEmpty()) 
+			return query.getResultList().size();
+		else
+			return 0;
 	}
 
 }

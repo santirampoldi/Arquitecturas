@@ -195,5 +195,14 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 		System.out.println("La consulta no devolvio ningun resultado");
 		return new ArrayList<Trabajo>();
 	}
-
+	
+	public int getCantidadUsuarios(){
+		EntityManager entityManager = EMF.createEntityManager();
+		Query query = entityManager.createNativeQuery("SELECT * FROM usuario", Usuario.class);
+		entityManager.close();
+		if (!query.getResultList().isEmpty()) 
+			return query.getResultList().size();
+		else
+			return 0;
+	}
 }
