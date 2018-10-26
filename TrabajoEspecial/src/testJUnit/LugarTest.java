@@ -65,6 +65,7 @@ public class LugarTest {
 	
 	@AfterClass
 	public static void tearDown(){
+		System.out.println("LugarTest-> Se eliminan datos de la tabla lugar");
 		LugarDAO.getInstance().removeAll();
 	}
 	

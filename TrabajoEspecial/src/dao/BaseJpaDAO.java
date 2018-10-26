@@ -37,4 +37,13 @@ public class BaseJpaDAO<Entity, ID extends Serializable> implements DAO<Entity, 
 		return null;
 	}
 	
+	public void dropDatabaseCacic(){
+		EntityManager entityManager = EMF.createEntityManager();
+		Query query = entityManager.createNativeQuery("DROP DATABASE cacic2018db");
+		entityManager.getTransaction().begin();
+		query.executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.close();
+	}
+	
 }

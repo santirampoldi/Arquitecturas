@@ -376,16 +376,14 @@ public class TrabajoTest {
 	
 	@AfterClass
 	public static void tearDown(){
-		
+		System.out.println("LugarTest-> Se eliminan datos de la tabla trabajo y datos utilizados");
+
 		TematicaDAO.getInstance().removeAll();
 		LugarDAO.getInstance().removeAll();
 		TipoTrabajoDAO.getInstance().removeAll();
-
-		
 		TrabajoDAO.getInstance().removeAll();
 		UsuarioDAO.getInstance().removeAll();
 		EvaluacionDAO.getInstance().removeAll();
-
 	}
 	
 }

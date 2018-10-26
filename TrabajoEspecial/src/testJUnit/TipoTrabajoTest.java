@@ -51,6 +51,7 @@ public class TipoTrabajoTest {
 	
 	@AfterClass
 	public static void tearDown(){
+		System.out.println("LugarTest-> Se eliminan datos de la tabla tipotrabajo");
 		TipoTrabajoDAO.getInstance().removeAll();
 	}
 	

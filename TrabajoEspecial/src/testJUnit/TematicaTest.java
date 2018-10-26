@@ -63,6 +63,7 @@ public class TematicaTest {
 	
 	@AfterClass
 	public static void tearDown(){
+		System.out.println("LugarTest-> Se eliminan datos de la tabla tematica");
 		TematicaDAO.getInstance().removeAll();
 	}
 	
