@@ -2,6 +2,7 @@ package testJUnit;
 
 import static org.junit.Assert.*;
 
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -47,5 +48,11 @@ public class TipoTrabajoTest {
 		System.out.println("TipoTrabajoTest-> Se compara que el tipo de trabajo sea incorrecto");
 		assertNotEquals("Poster", tipoTrabajoBBDD.getNombre());
 	}
+	
+	@AfterClass
+	public static void tearDown(){
+		TipoTrabajoDAO.getInstance().removeAll();
+	}
+	
 
 }

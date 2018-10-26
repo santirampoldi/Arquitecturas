@@ -2,8 +2,6 @@ package testJUnit;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -63,6 +61,11 @@ public class LugarTest {
 	public void testCompararNombreCiudadErroneo() {
 		System.out.println("LugarTest-> Se comprueba que la ciudad sea incorrecto");
 		assertNotEquals("La plata", lugarBBDD.getCiudad());
+	}
+	
+	@AfterClass
+	public static void tearDown(){
+		LugarDAO.getInstance().removeAll();
 	}
 	
 }

@@ -38,6 +38,14 @@ public class TematicaDAO extends BaseJpaDAO<Tematica, Integer> {
 		return tematica;
 	}
 
+	public void removeAll() {
+		EntityManager entityManager = EMF.createEntityManager();
+		Query query = entityManager.createNativeQuery("DELETE FROM tematica");
+		entityManager.getTransaction().begin();
+		query.executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.close();
+	}
 
 	@Override
 	public List<Tematica> findAll() {

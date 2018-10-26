@@ -1,6 +1,7 @@
 package dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import entidades.EMF;
 import entidades.Evaluacion;
@@ -34,4 +35,15 @@ public class EvaluacionDAO extends BaseJpaDAO<Evaluacion, Integer>{
 		entityManager.close();
 		return evaluacion;
 	}
+	
+	public void removeAll() {
+		EntityManager entityManager = EMF.createEntityManager();
+		Query query = entityManager.createNativeQuery("DELETE FROM evaluacion");
+		entityManager.getTransaction().begin();
+		query.executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.close();
+	}
+	
+	
 }

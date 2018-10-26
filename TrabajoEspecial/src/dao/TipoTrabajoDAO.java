@@ -37,6 +37,15 @@ public class TipoTrabajoDAO extends BaseJpaDAO<TipoTrabajo, Integer> {
 		entityManager.close();
 		return tipoTrabajo;
 	}
+	
+	public void removeAll() {
+		EntityManager entityManager = EMF.createEntityManager();
+		Query query = entityManager.createNativeQuery("DELETE FROM tipotrabajo");
+		entityManager.getTransaction().begin();
+		query.executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.close();
+	}
 
 	@Override
 	public List<TipoTrabajo> findAll() {

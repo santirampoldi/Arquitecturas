@@ -38,6 +38,14 @@ public class LugarDAO extends BaseJpaDAO<Lugar, Integer> {
 		return lugar;
 	}
 	
+	public void removeAll() {
+		EntityManager entityManager = EMF.createEntityManager();
+		Query query = entityManager.createNativeQuery("DELETE FROM lugar");
+		entityManager.getTransaction().begin();
+		query.executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.close();
+	}
 
 	@Override
 	public List<Lugar> findAll() {

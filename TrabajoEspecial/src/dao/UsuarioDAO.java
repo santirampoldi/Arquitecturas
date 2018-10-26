@@ -44,6 +44,15 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 		entityManager.close();
 		return usuario;
 	}
+	
+	public void removeAll() {
+		EntityManager entityManager = EMF.createEntityManager();
+		Query query = entityManager.createNativeQuery("DELETE FROM usuario");
+		entityManager.getTransaction().begin();
+		query.executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.close();
+	}
 
 	public boolean persistMany(Set<Usuario> usuarios) {
 		EntityManager entityManager = EMF.createEntityManager();

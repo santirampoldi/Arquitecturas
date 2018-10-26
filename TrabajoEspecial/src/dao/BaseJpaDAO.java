@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import entidades.EMF;
 
 public class BaseJpaDAO<Entity, ID extends Serializable> implements DAO<Entity, ID>{
 	EntityManager entityManager;
@@ -33,5 +36,5 @@ public class BaseJpaDAO<Entity, ID extends Serializable> implements DAO<Entity, 
 	public List<Entity> findAll() {
 		return null;
 	}
-
+	
 }

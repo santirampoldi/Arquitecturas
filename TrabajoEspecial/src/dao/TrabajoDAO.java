@@ -44,6 +44,15 @@ public class TrabajoDAO extends BaseJpaDAO<Trabajo, Integer> {
 		entityManager.close();
 		return trabajo;
 	}
+	
+	public void removeAll() {
+		EntityManager entityManager = EMF.createEntityManager();
+		Query query = entityManager.createNativeQuery("DELETE FROM trabajo");
+		entityManager.getTransaction().begin();
+		query.executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.close();
+	}
 
 	public Set<Usuario> evaluadoresAsignables(Trabajo t) {
 		Set<Usuario> retorno = new HashSet<Usuario>();

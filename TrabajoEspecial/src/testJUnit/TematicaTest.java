@@ -2,6 +2,7 @@ package testJUnit;
 
 import static org.junit.Assert.*;
 
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -59,4 +60,10 @@ public class TematicaTest {
 		System.out.println("TematicaTest-> Se comprueba si no es conocimiento experto");
 		assertFalse(!tematicaBBDD.getTipo());
 	}
+	
+	@AfterClass
+	public static void tearDown(){
+		TematicaDAO.getInstance().removeAll();
+	}
+	
 }

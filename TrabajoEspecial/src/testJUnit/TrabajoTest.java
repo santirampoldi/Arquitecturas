@@ -7,6 +7,7 @@ import java.util.Set;
 
 import static org.junit.Assert.*;
 
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -372,4 +373,19 @@ public class TrabajoTest {
 		System.out.println("TrabajoTest-> Se comprueba cantidad de trabajos incorrecta segun autor, evaluador y tematica");
 		assertNotEquals(2, usuarioDAO.findAllTrabajosAutorRevisorTema(36626800, 39887658, ia.getId()).size());
 	}
+	
+	@AfterClass
+	public static void tearDown(){
+		
+		TematicaDAO.getInstance().removeAll();
+		LugarDAO.getInstance().removeAll();
+		TipoTrabajoDAO.getInstance().removeAll();
+
+		
+		TrabajoDAO.getInstance().removeAll();
+		UsuarioDAO.getInstance().removeAll();
+		EvaluacionDAO.getInstance().removeAll();
+
+	}
+	
 }
