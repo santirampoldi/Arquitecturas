@@ -19,8 +19,8 @@ import dao.UsuarioDAO;
 import entidades.Usuario;
 
 
-@Path("/usuarios")
-public class RESTController {
+@Path("/usuario")
+public class UsuarioController {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -34,18 +34,29 @@ public class RESTController {
 	public Usuario getUsuarioById(@PathParam("id") String msg) {
 		int id = Integer.valueOf(msg);
 		Usuario usuario = UsuarioDAO.getInstance().findById(id);
-		if(usuario!=null)
+		if(usuario!= null)
 			return usuario;
 		else
 			throw new RecursoNoExiste(id);
 	}
+
+//	@GET 
+//	@Path("/{id}") 
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public String getUserById(@PathParam("id") String msg) {
+//		Usuario user = new Usuario();
+//		//		int id=Integer.valueOf(msg);
+//		//		Usuario usuario = UsuarioDAO.getInstance().findById(id,this.EM);
+//		//return user;
+//		return "<html> " + "<title>" + "Hello Jersey" + "</title>";
+//	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createUsuario(Usuario usuario) {
 		Usuario result = UsuarioDAO.getInstance().persist(usuario);
-		if(result==null) {
+		if(result == null) {
 			throw new RecursoDuplicado(usuario.getDni());
 		}
 		else {
@@ -65,14 +76,6 @@ public class RESTController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateUsuario(@PathParam("id") int id,Usuario usuario) {
-		throw new UnsupportedOperationException();
-	}
-
-	@GET
-	@Path("/findUsuariosByEdad")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Usuario> findUsuariosByEdad(@QueryParam("from") int from,
-			@QueryParam("to") int to) {
 		throw new UnsupportedOperationException();
 	}
 

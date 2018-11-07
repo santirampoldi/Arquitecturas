@@ -26,6 +26,7 @@
 				value="jdbc:mysql://localhost:3306/CACIC2018DB?CreateDatabaseIfNotExist=true" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="" />
+			<!-- <property name = "hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/> -->
 
 			<!-- g) Drop y create de la base de datos en cada inicializacion -->
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
