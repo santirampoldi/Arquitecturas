@@ -15,28 +15,28 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import dao.UsuarioDAO;
-import entidades.Usuario;
+import dao.EvaluacionDAO;
+import entidades.Evaluacion;
 
 
-@Path("/usuarios")
-public class UsuarioController {
+@Path("/evaluacions")
+public class EvaluacionController {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Usuario> getAllUsuarios() {
-		System.out.println("traigo todos los usuarios");
-		return UsuarioDAO.getInstance().findAll();
+	public List<Evaluacion> getAllEvaluacions() {
+		System.out.println("traigo todos los evaluacions");
+		return EvaluacionDAO.getInstance().findAll();
 	}
 
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Usuario getUsuarioById(@PathParam("id") String msg) {
+	public Evaluacion getEvaluacionById(@PathParam("id") String msg) {
 		int id = Integer.valueOf(msg);
-		Usuario usuario = UsuarioDAO.getInstance().findById(id);
-		if(usuario!= null)
-			return usuario;
+		Evaluacion evaluacion = EvaluacionDAO.getInstance().findById(id);
+		if(evaluacion!= null)
+			return evaluacion;
 		else
 			throw new RecursoNoExiste(id);
 	}
@@ -44,21 +44,21 @@ public class UsuarioController {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createUsuario(Usuario usuario) {
-		Usuario result = UsuarioDAO.getInstance().persist(usuario);
+	public Response createEvaluacion(Evaluacion evaluacion) {
+		Evaluacion result = EvaluacionDAO.getInstance().persist(evaluacion);
 		if(result == null) {
-			throw new RecursoDuplicado(usuario.getDni());
+			throw new RecursoDuplicado(evaluacion.getId());
 		}
 		else {
-			return Response.status(201).entity(usuario).build();
+			return Response.status(201).entity(evaluacion).build();
 		}
 	}
 
 	@DELETE
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deleteUsuario(@PathParam("id") int id) {
-		boolean wasDeleted = UsuarioDAO.getInstance().delete(id);
+	public Response deleteEvaluacion(@PathParam("id") int id) {
+		boolean wasDeleted = EvaluacionDAO.getInstance().delete(id);
 		if(wasDeleted)
 			return Response.status(200).build();
 		else
@@ -69,12 +69,12 @@ public class UsuarioController {
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateUsuario(@PathParam("id") int id,Usuario usuario) {
-		Usuario result = UsuarioDAO.getInstance().update(id, usuario);
+	public Response updateEvaluacion(@PathParam("id") int id,Evaluacion evaluacion) {
+		Evaluacion result = EvaluacionDAO.getInstance().update(id, evaluacion);
 		if(result==null) {
 			throw new RecursoNoExiste(id);
 		}else {
-			return Response.status(200).entity(usuario).build();
+			return Response.status(200).entity(evaluacion).build();
 		}
 	}
 

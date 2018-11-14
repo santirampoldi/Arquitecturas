@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import entidades.EMF;
+import entidades.Lugar;
 import entidades.Lugar;    
 
 public class LugarDAO extends BaseJpaDAO<Lugar, Integer> {
@@ -37,7 +38,7 @@ public class LugarDAO extends BaseJpaDAO<Lugar, Integer> {
 		entityManager.close();
 		return lugar;
 	}
-	
+
 	public void removeAll() {
 		EntityManager entityManager = EMF.createEntityManager();
 		Query query = entityManager.createNativeQuery("DELETE FROM lugar");
@@ -59,13 +60,44 @@ public class LugarDAO extends BaseJpaDAO<Lugar, Integer> {
 		//System.out.println("La consulta no devolvio ningun resultado");
 		throw new UnsupportedOperationException();
 	}
-	
+
 	public Lugar getFirst(){
 		return findAll().get(0);
 	}
-	
+
 	public int getCantidadLugares() {
 		return findAll().size()+0;
 	}
+
+	public boolean delete(int id) {
+		EntityManager entityManager = EMF.createEntityManager();
+		entityManager.getTransaction().begin();
+		Query query = entityManager.createQuery("DELETE FROM Lugar l WHERE l.id = :id");
+		query.setParameter("id", id);
+		int deletedCount = query.executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		if(deletedCount > 0)
+			return true;
+		else
+			return false;
+	}
+
+	public Lugar update(int id, Lugar entity) {
+		EntityManager entityManager = EMF.createEntityManager();
+		Lugar entityAux = entityManager.find(Lugar.class, id);
+		if (entityAux == null) {
+			entityManager.close();
+			return null;
+		} else {
+			entityManager.getTransaction().begin();
+			entityAux.setNombre(entity.getNombre());
+			//TO DO
+			entityManager.getTransaction().commit();
+			entityManager.close();
+			return entityAux;
+		}
+	}
+
 
 }

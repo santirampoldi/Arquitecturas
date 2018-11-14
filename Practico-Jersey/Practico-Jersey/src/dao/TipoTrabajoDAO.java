@@ -5,7 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import entidades.EMF;
-import entidades.TipoTrabajo;    
+import entidades.TipoTrabajo;
+import entidades.Usuario;    
 
 public class TipoTrabajoDAO extends BaseJpaDAO<TipoTrabajo, Integer> {
 
@@ -66,6 +67,36 @@ public class TipoTrabajoDAO extends BaseJpaDAO<TipoTrabajo, Integer> {
 	
 	public int getCantidadTiposTrabajo() {
 		return findAll().size()+0;
+	}
+	
+	public boolean delete(int id) {
+		EntityManager entityManager = EMF.createEntityManager();
+		entityManager.getTransaction().begin();
+		Query query = entityManager.createQuery("DELETE FROM TipoTrabajo tt WHERE tt.id = :id");
+		query.setParameter("id", id);
+		int deletedCount = query.executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		if(deletedCount > 0)
+			return true;
+		else
+			return false;
+	}
+
+	public TipoTrabajo update(int id, TipoTrabajo entity) {
+		EntityManager entityManager = EMF.createEntityManager();
+		TipoTrabajo entityAux = entityManager.find(TipoTrabajo.class, id);
+		if (entityAux == null) {
+			entityManager.close();
+			return null;
+		} else {
+			entityManager.getTransaction().begin();
+			entityAux.setNombre(entity.getNombre());
+			//TO DO
+			entityManager.getTransaction().commit();
+			entityManager.close();
+			return entityAux;
+		}
 	}
 
 }

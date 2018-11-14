@@ -5,7 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import entidades.EMF;
-import entidades.Tematica;    
+import entidades.Tematica;
+import entidades.Usuario;    
 
 public class TematicaDAO extends BaseJpaDAO<Tematica, Integer> {
 
@@ -59,13 +60,43 @@ public class TematicaDAO extends BaseJpaDAO<Tematica, Integer> {
 		//System.out.println("La consulta no devolvio ningun resultado");
 		throw new UnsupportedOperationException();
 	}
-	
+
 	public Tematica getFirst(){
 		return findAll().get(0);
 	}
-	
+
 	public int getCantidadTematicas() {
 		return findAll().size()+0;
+	}
+
+	public boolean delete(int id) {
+		EntityManager entityManager = EMF.createEntityManager();
+		entityManager.getTransaction().begin();
+		Query query = entityManager.createQuery("DELETE FROM Tematica t WHERE t.id = :id");
+		query.setParameter("id", id);
+		int deletedCount = query.executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		if(deletedCount > 0)
+			return true;
+		else
+			return false;
+	}
+
+	public Tematica update(int id, Tematica entity) {
+		EntityManager entityManager = EMF.createEntityManager();
+		Tematica entityAux = entityManager.find(Tematica.class, id);
+		if (entityAux == null) {
+			entityManager.close();
+			return null;
+		} else {
+			entityManager.getTransaction().begin();
+			entityAux.setNombre(entity.getNombre());
+			//TO DO
+			entityManager.getTransaction().commit();
+			entityManager.close();
+			return entityAux;
+		}
 	}
 
 }

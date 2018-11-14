@@ -11,10 +11,18 @@ import javax.servlet.annotation.WebListener;
 public class EMF implements ServletContextListener {
 	private static EntityManagerFactory emf;
 
+	/**
+	 * @see ServletContextListener#contextInitialized(ServletContextEvent)
+	 */
+	
 	public void contextInitialized(ServletContextEvent arg0) {
 		emf = Persistence.createEntityManagerFactory("TrabajoEspecial");
 	}
 
+	/**
+	 * @see ServletContextListener#contextDestroyed(ServletContextEvent)
+	 */
+	
 	public void contextDestroyed(ServletContextEvent arg0) {
 		emf.close();
 	}

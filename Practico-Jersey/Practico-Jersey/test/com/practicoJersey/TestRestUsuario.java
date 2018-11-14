@@ -47,7 +47,6 @@ public class TestRestUsuario {
 
 	public final HttpClient client = HttpClientBuilder.create().build();
 
-	@BeforeClass
 	public static void setUpEnviroment(){
 		System.out.println("UsuarioTest-> Comienza el test");
 		System.out.println("UsuarioTest-> Se prepara el ambiente");

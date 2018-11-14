@@ -5,6 +5,7 @@ import javax.persistence.Query;
 
 import entidades.EMF;
 import entidades.Evaluacion;
+import entidades.Evaluacion;
 
 public class EvaluacionDAO extends BaseJpaDAO<Evaluacion, Integer>{
 
@@ -44,6 +45,36 @@ public class EvaluacionDAO extends BaseJpaDAO<Evaluacion, Integer>{
 		entityManager.getTransaction().commit();
 		entityManager.close();
 	}
+	
+	public boolean delete(int id) {
+		EntityManager entityManager = EMF.createEntityManager();
+		entityManager.getTransaction().begin();
+		Query query = entityManager.createQuery("DELETE FROM Evaluacion e WHERE e.id = :id");
+		query.setParameter("id", id);
+		int deletedCount = query.executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		if(deletedCount > 0)
+			return true;
+		else
+			return false;
+	}
+
+	public Evaluacion update(int id, Evaluacion entity) {
+		EntityManager entityManager = EMF.createEntityManager();
+		Evaluacion entityAux = entityManager.find(Evaluacion.class, id);
+		if (entityAux == null) {
+			entityManager.close();
+			return null;
+		} else {
+			entityManager.getTransaction().begin();
+			//TO DO
+			entityManager.getTransaction().commit();
+			entityManager.close();
+			return entityAux;
+		}
+	}
+
 	
 	
 }

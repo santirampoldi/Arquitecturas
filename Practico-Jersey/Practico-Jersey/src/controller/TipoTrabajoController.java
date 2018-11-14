@@ -15,28 +15,28 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import dao.UsuarioDAO;
-import entidades.Usuario;
+import dao.TipoTrabajoDAO;
+import entidades.TipoTrabajo;
 
 
-@Path("/usuarios")
-public class UsuarioController {
+@Path("/tipoTrabajos")
+public class TipoTrabajoController {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Usuario> getAllUsuarios() {
-		System.out.println("traigo todos los usuarios");
-		return UsuarioDAO.getInstance().findAll();
+	public List<TipoTrabajo> getAllTipoTrabajos() {
+		System.out.println("traigo todos los tipoTrabajos");
+		return TipoTrabajoDAO.getInstance().findAll();
 	}
 
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Usuario getUsuarioById(@PathParam("id") String msg) {
+	public TipoTrabajo getTipoTrabajoById(@PathParam("id") String msg) {
 		int id = Integer.valueOf(msg);
-		Usuario usuario = UsuarioDAO.getInstance().findById(id);
-		if(usuario!= null)
-			return usuario;
+		TipoTrabajo tipoTrabajo = TipoTrabajoDAO.getInstance().findById(id);
+		if(tipoTrabajo!= null)
+			return tipoTrabajo;
 		else
 			throw new RecursoNoExiste(id);
 	}
@@ -44,21 +44,21 @@ public class UsuarioController {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createUsuario(Usuario usuario) {
-		Usuario result = UsuarioDAO.getInstance().persist(usuario);
+	public Response createTipoTrabajo(TipoTrabajo tipoTrabajo) {
+		TipoTrabajo result = TipoTrabajoDAO.getInstance().persist(tipoTrabajo);
 		if(result == null) {
-			throw new RecursoDuplicado(usuario.getDni());
+			throw new RecursoDuplicado(tipoTrabajo.getId());
 		}
 		else {
-			return Response.status(201).entity(usuario).build();
+			return Response.status(201).entity(tipoTrabajo).build();
 		}
 	}
 
 	@DELETE
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deleteUsuario(@PathParam("id") int id) {
-		boolean wasDeleted = UsuarioDAO.getInstance().delete(id);
+	public Response deleteTipoTrabajo(@PathParam("id") int id) {
+		boolean wasDeleted = TipoTrabajoDAO.getInstance().delete(id);
 		if(wasDeleted)
 			return Response.status(200).build();
 		else
@@ -69,12 +69,12 @@ public class UsuarioController {
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateUsuario(@PathParam("id") int id,Usuario usuario) {
-		Usuario result = UsuarioDAO.getInstance().update(id, usuario);
+	public Response updateTipoTrabajo(@PathParam("id") int id,TipoTrabajo tipoTrabajo) {
+		TipoTrabajo result = TipoTrabajoDAO.getInstance().update(id, tipoTrabajo);
 		if(result==null) {
 			throw new RecursoNoExiste(id);
 		}else {
-			return Response.status(200).entity(usuario).build();
+			return Response.status(200).entity(tipoTrabajo).build();
 		}
 	}
 
