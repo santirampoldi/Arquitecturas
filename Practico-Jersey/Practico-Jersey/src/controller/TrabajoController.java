@@ -57,7 +57,11 @@ public class TrabajoController {
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteUsuario(@PathParam("id") int id) {
-		throw new UnsupportedOperationException();
+		boolean wasDeleted = TrabajoDAO.getInstance().delete(id);
+		if(wasDeleted)
+			return Response.status(200).build();
+		else
+			throw new RecursoNoExiste(id);
 	}
 
 	@PUT
@@ -65,7 +69,12 @@ public class TrabajoController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateUsuario(@PathParam("id") int id,Trabajo trabajo) {
-		throw new UnsupportedOperationException();
+		Trabajo result = TrabajoDAO.getInstance().update(id, trabajo);
+		if(result==null) {
+			throw new RecursoNoExiste(id);
+		}else {
+			return Response.status(200).entity(trabajo).build();
+		}
 	}
 
 	public class RecursoDuplicado extends WebApplicationException {

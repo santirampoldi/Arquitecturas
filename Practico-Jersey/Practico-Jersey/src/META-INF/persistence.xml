@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+	<persistence-unit name="TrabajoEspecial">
+		<description>Contexto de persistencia con Apache Derby, Hibernate y entidades JPA definidas mediante anotaciones</description>
+
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<!-- <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
+		<!-- <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider> -->
+
+		
+		<class>com.practicoJersey.Perro</class>
+		<class>entidades.Evaluacion</class>
+		<class>entidades.Lugar</class>
+		<class>entidades.Tematica</class>
+		<class>entidades.TipoTrabajo</class>
+		<class>entidades.Trabajo</class>
+		<class>entidades.Usuario</class>
+
+		<properties>
+			<!-- Propiedades de configuracion de JDBC para MySQL -->
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<!-- a) Si la base de datos no existe, se crea -->
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/CACIC2018DB?CreateDatabaseIfNotExist=true" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="" />
+			<property name = "hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+
+			<!-- g) Drop y create de la base de datos en cada inicializacion -->
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+			<!-- <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/> -->
+			<!-- <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/> -->
+		</properties>
+	</persistence-unit>
+
+</persistence>

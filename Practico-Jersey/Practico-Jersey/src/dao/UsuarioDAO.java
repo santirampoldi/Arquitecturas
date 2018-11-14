@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+
 import entidades.EMF;
 import entidades.Tematica;
 import entidades.Trabajo;
@@ -44,7 +45,7 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 		entityManager.close();
 		return usuario;
 	}
-	
+
 	public void removeAll() {
 		EntityManager entityManager = EMF.createEntityManager();
 		Query query = entityManager.createNativeQuery("DELETE FROM usuario");
@@ -77,7 +78,7 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 			List<Tematica> t = query.getResultList();
 			for (int i = 0; i < t.size(); i++) {
 				if (t.get(i).getTipo() == true) {
-//					System.out.println(t.get(i).getId());
+					//					System.out.println(t.get(i).getId());
 					return true;
 				}
 			}
@@ -157,11 +158,11 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 		//System.out.println("La consulta no devolvio ningun resultado");
 		throw new UnsupportedOperationException();
 	}
-	
+
 	public int getCantidadUsuarios(){
 		return findAllUsuarios().size()+0;
 	}
-	
+
 	public Usuario getFirst(){
 		return findAllUsuarios().get(0);
 	}
@@ -172,9 +173,9 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 		if(user != null) {
 			Query query = entityManager.createNativeQuery(
 					"SELECT t.* FROM trabajo t "
-					+ "JOIN evaluacion e ON t.id = e.trabajo_id "
-					+ "WHERE e.evaluador_dni = :id AND e.fecha >= :desde "
-					+ "AND e.fecha <= :hasta", Trabajo.class);
+							+ "JOIN evaluacion e ON t.id = e.trabajo_id "
+							+ "WHERE e.evaluador_dni = :id AND e.fecha >= :desde "
+							+ "AND e.fecha <= :hasta", Trabajo.class);
 			query.setParameter("id", id);
 			query.setParameter("desde", desde);
 			query.setParameter("hasta", hasta);
@@ -191,18 +192,18 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 		Usuario autor = this.findById(idAutor);
 		Usuario evaluador = this.findById(idEvaluador);
 		List<Trabajo>retorno = new ArrayList<Trabajo>();
-		
+
 		TematicaDAO daoT = TematicaDAO.getInstance();
 		Tematica tema = daoT .findById(idTematica);
 		if(autor != null && evaluador != null && tema !=null) {
 			Query query = entityManager.createNativeQuery(
 					"SELECT * FROM trabajo t "
-					+ "JOIN autor_trabajo aut ON t.id = aut.trabajo_id "
-					+ "JOIN evaluador_trabajo et ON t.id = et.trabajo_id "
-					+ "JOIN trabajo_tematica tt ON t.id = tt.Trabajo_id "
-					+ "WHERE aut.autor_id = :idAutor " 
-					+ "AND et.evaluador_id = :idEvaluador "
-					+ "AND tt.temas_id = :idTematica", Trabajo.class);
+							+ "JOIN autor_trabajo aut ON t.id = aut.trabajo_id "
+							+ "JOIN evaluador_trabajo et ON t.id = et.trabajo_id "
+							+ "JOIN trabajo_tematica tt ON t.id = tt.Trabajo_id "
+							+ "WHERE aut.autor_id = :idAutor " 
+							+ "AND et.evaluador_id = :idEvaluador "
+							+ "AND tt.temas_id = :idTematica", Trabajo.class);
 			query.setParameter("idAutor", idAutor);
 			query.setParameter("idEvaluador", idEvaluador);
 			query.setParameter("idTematica", idTematica);
@@ -213,5 +214,35 @@ public class UsuarioDAO extends BaseJpaDAO<Usuario, Integer> {
 		}
 		//System.out.println("La consulta no devolvio ningun resultado");
 		return new ArrayList<Trabajo>();
+	}
+
+	public boolean delete(int id) {
+		EntityManager entityManager = EMF.createEntityManager();
+		entityManager.getTransaction().begin();
+		Query query = entityManager.createQuery("DELETE FROM Usuario u WHERE u.id = :id");
+		query.setParameter("id", id);
+		int deletedCount = query.executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		if(deletedCount > 0)
+			return true;
+		else
+			return false;
+	}
+
+	public Usuario update(int id, Usuario entity) {
+		EntityManager entityManager = EMF.createEntityManager();
+		Usuario entityAux = entityManager.find(Usuario.class, id);
+		if (entityAux == null) {
+			entityManager.close();
+			return null;
+		} else {
+			entityManager.getTransaction().begin();
+			entityAux.setNombre(entity.getNombre());
+			//TO DO
+			entityManager.getTransaction().commit();
+			entityManager.close();
+			return entityAux;
+		}
 	}
 }

@@ -40,5 +40,37 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="/SeleniumTest/client-combined-3.6.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/santi/.m2/repository/org/apache/httpcomponents/httpclient/4.5.2/httpclient-4.5.2.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+			<attribute name="maven.groupId" value="org.apache.httpcomponents"/>
+			<attribute name="maven.artifactId" value="httpclient"/>
+			<attribute name="maven.version" value="4.5.2"/>
+			<attribute name="maven.scope" value="test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="C:/Users/santi/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.8.4/jackson-databind-2.8.4.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.archivename" value="jackson-databind-2.8.4.jar"/>
+			<attribute name="maven.groupId" value="com.fasterxml.jackson.core"/>
+			<attribute name="maven.artifactId" value="jackson-databind"/>
+			<attribute name="maven.version" value="2.8.4"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/santi/.m2/repository/org/apache/httpcomponents/httpcore/4.4.5/httpcore-4.4.5.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+			<attribute name="maven.groupId" value="org.apache.httpcomponents"/>
+			<attribute name="maven.artifactId" value="httpcore"/>
+			<attribute name="maven.version" value="4.4.5"/>
+			<attribute name="maven.scope" value="test"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

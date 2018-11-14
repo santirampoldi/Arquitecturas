@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+
 import entidades.EMF;
 import entidades.TipoTrabajo;
 import entidades.Trabajo;
@@ -90,11 +91,38 @@ public class TrabajoDAO extends BaseJpaDAO<Trabajo, Integer> {
 	}
 
 	public boolean delete(Integer id) {
-		Trabajo trabajo = this.findById(id);		
-		if(trabajo != null) {
-			entityManager.remove(trabajo);
+		EntityManager entityManager = EMF.createEntityManager();
+		entityManager.getTransaction().begin();
+		Query query = entityManager.createQuery("DELETE FROM Trabajo t WHERE t.id = :id");
+		query.setParameter("id", id);
+		int deletedCount = query.executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		if(deletedCount > 0)
 			return true;
+		else
+			return false;
+//		Trabajo trabajo = this.findById(id);		
+//		if(trabajo != null) {
+//			entityManager.remove(trabajo);
+//			return true;
+//		}
+//		return false;
+	}
+
+	public Trabajo update(int id, Trabajo entity) {
+		EntityManager entityManager = EMF.createEntityManager();
+		Trabajo entityAux = entityManager.find(Trabajo.class, id);
+		if (entityAux == null) {
+			entityManager.close();
+			return null;
+		} else {
+			entityManager.getTransaction().begin();
+			entityAux.setNombre(entity.getNombre());
+			//TO DO
+			entityManager.getTransaction().commit();
+			entityManager.close();
+			return entityAux;
 		}
-		return false;
 	}
 }

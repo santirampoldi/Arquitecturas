@@ -19,12 +19,13 @@ import dao.UsuarioDAO;
 import entidades.Usuario;
 
 
-@Path("/usuario")
+@Path("/usuarios")
 public class UsuarioController {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Usuario> getAllUsuarios() {
+		System.out.println("traigo todos los usuarios");
 		return UsuarioDAO.getInstance().findAll();
 	}
 
@@ -32,6 +33,7 @@ public class UsuarioController {
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Usuario getUsuarioById(@PathParam("id") String msg) {
+		System.out.println("traigo un usuario");
 		int id = Integer.valueOf(msg);
 		Usuario usuario = UsuarioDAO.getInstance().findById(id);
 		if(usuario!= null)
@@ -40,21 +42,11 @@ public class UsuarioController {
 			throw new RecursoNoExiste(id);
 	}
 
-//	@GET 
-//	@Path("/{id}") 
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public String getUserById(@PathParam("id") String msg) {
-//		Usuario user = new Usuario();
-//		//		int id=Integer.valueOf(msg);
-//		//		Usuario usuario = UsuarioDAO.getInstance().findById(id,this.EM);
-//		//return user;
-//		return "<html> " + "<title>" + "Hello Jersey" + "</title>";
-//	}
-
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createUsuario(Usuario usuario) {
+		System.out.println("creo usuario");
 		Usuario result = UsuarioDAO.getInstance().persist(usuario);
 		if(result == null) {
 			throw new RecursoDuplicado(usuario.getDni());
@@ -68,7 +60,11 @@ public class UsuarioController {
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteUsuario(@PathParam("id") int id) {
-		throw new UnsupportedOperationException();
+		boolean wasDeleted = UsuarioDAO.getInstance().delete(id);
+		if(wasDeleted)
+			return Response.status(200).build();
+		else
+			throw new RecursoNoExiste(id);
 	}
 
 	@PUT
@@ -76,7 +72,12 @@ public class UsuarioController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateUsuario(@PathParam("id") int id,Usuario usuario) {
-		throw new UnsupportedOperationException();
+		Usuario result = UsuarioDAO.getInstance().update(id, usuario);
+		if(result==null) {
+			throw new RecursoNoExiste(id);
+		}else {
+			return Response.status(200).entity(usuario).build();
+		}
 	}
 
 	public class RecursoDuplicado extends WebApplicationException {
