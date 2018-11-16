@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import entidades.EMF;
 import entidades.Lugar;
-import entidades.Lugar;    
 
 public class LugarDAO extends BaseJpaDAO<Lugar, Integer> {
 

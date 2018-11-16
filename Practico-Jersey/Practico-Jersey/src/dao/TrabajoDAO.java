@@ -11,7 +11,6 @@ import javax.persistence.Query;
 
 
 import entidades.EMF;
-import entidades.TipoTrabajo;
 import entidades.Trabajo;
 import entidades.Usuario;    
 

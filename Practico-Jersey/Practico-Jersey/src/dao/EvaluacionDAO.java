@@ -5,7 +5,6 @@ import javax.persistence.Query;
 
 import entidades.EMF;
 import entidades.Evaluacion;
-import entidades.Evaluacion;
 
 public class EvaluacionDAO extends BaseJpaDAO<Evaluacion, Integer>{
 

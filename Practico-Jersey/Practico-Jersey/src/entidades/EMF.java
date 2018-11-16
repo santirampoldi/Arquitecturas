@@ -29,6 +29,7 @@ public class EMF implements ServletContextListener {
 
 	public static EntityManager createEntityManager() {
 		if (emf == null) {
+			System.out.println("creo EMF");
 			emf = Persistence.createEntityManagerFactory("TrabajoEspecial");	
 		}
 		return emf.createEntityManager();

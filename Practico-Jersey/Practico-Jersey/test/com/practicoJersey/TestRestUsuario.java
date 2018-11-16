@@ -43,10 +43,11 @@ public class TestRestUsuario {
 	private static Usuario usuario;
 	private static Usuario usuarioBBDD;
 
-	public final String BASE_URL = "http://localhost:8080/Practico-Jersey/api";
+	public final String BASE_URL = "http://localhost:8080/ArqWeb/api";
 
 	public final HttpClient client = HttpClientBuilder.create().build();
 
+	@BeforeClass
 	public static void setUpEnviroment(){
 		System.out.println("UsuarioTest-> Comienza el test");
 		System.out.println("UsuarioTest-> Se prepara el ambiente");
@@ -75,12 +76,11 @@ public class TestRestUsuario {
 
 	@Test
 	public void testRESTInterface() throws ClientProtocolException, IOException {
-		crearUsuarios();
+		//		crearUsuarios();
 		getUsuario();
-		listarUsuarios();
+		//		listarUsuarios();
 		//		updateUsuario();
 		//		deleteUsuario();
-		//		listarUsuarios();
 	}
 
 
@@ -125,12 +125,10 @@ public class TestRestUsuario {
 		}
 	}
 
-
-
 	public void getUsuario() throws ClientProtocolException, IOException {
 		System.out.println("UsuarioTest-> Se trae un usuario");
 
-		String url = BASE_URL + "/usuarios/41313351";
+		String url = BASE_URL + "/usuarios/36626800";
 
 		HttpGet request = new HttpGet(url);
 

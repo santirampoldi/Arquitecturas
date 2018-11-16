@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import entidades.EMF;
 import entidades.Tematica;
-import entidades.Usuario;    
 
 public class TematicaDAO extends BaseJpaDAO<Tematica, Integer> {
 

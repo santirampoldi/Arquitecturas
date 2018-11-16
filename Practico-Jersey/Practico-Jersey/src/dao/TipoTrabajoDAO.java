@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import entidades.EMF;
 import entidades.TipoTrabajo;
-import entidades.Usuario;    
 
 public class TipoTrabajoDAO extends BaseJpaDAO<TipoTrabajo, Integer> {
 

@@ -2,13 +2,11 @@ package testJUnit;
 
 import java.util.Calendar;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.*;
 
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,7 +16,6 @@ import dao.UsuarioDAO;
 import dao.TematicaDAO;
 import dao.TipoTrabajoDAO;
 import dao.TrabajoDAO;
-import dao.EvaluacionDAO;
 import entidades.Lugar;
 import entidades.Tematica;
 import entidades.TipoTrabajo;
@@ -82,25 +79,25 @@ public class TrabajoTest {
 		assertNotNull(unlp);
 		uba = new Lugar ("UBA", "Buenos Aires");
 		
-		usuario1 = new Usuario(41313351, "Santiago", "Rampoldi", uncpba);
+		usuario1 = new Usuario(41313352, "Santiago", "Rampoldi", uncpba);
 		assertNotNull(usuario1);
-		usuario2 = new Usuario(36626800, "Agustin", "Meliendrez", uncpba);
+		usuario2 = new Usuario(36626803, "Agustin", "Meliendrez", uncpba);
 		assertNotNull(usuario2);
-		usuario3 = new Usuario(10679754, "Albert", "Einsten", unlp);
+		usuario3 = new Usuario(10679753, "Albert", "Einsten", unlp);
 		assertNotNull(usuario3);
-		usuario4 = new Usuario(16784638, "Steve", "Jobs", unlp);
+		usuario4 = new Usuario(16784639, "Steve", "Jobs", unlp);
 		assertNotNull(usuario4);
-		usuario5 = new Usuario(14273648, "Bill", "Gates", uncpba);
+		usuario5 = new Usuario(14273640, "Bill", "Gates", uncpba);
 		assertNotNull(usuario5);
-		usuario6 = new Usuario(20837465, "Mark", "Zuckerberg", unlp);
+		usuario6 = new Usuario(20837464, "Mark", "Zuckerberg", unlp);
 		assertNotNull(usuario6);
-		usuario7 = new Usuario(15682783, "Stephen", "Hawking", unlp);
+		usuario7 = new Usuario(15682781, "Stephen", "Hawking", unlp);
 		assertNotNull(usuario7);
-		usuario8 = new Usuario(27937478, "Alan", "Turing", uncpba);
+		usuario8 = new Usuario(27937477, "Alan", "Turing", uncpba);
 		assertNotNull(usuario8);
-		usuario9 = new Usuario(22736482, "Tim", "Berners-Lee", unlp);
+		usuario9 = new Usuario(22736483, "Tim", "Berners-Lee", unlp);
 		assertNotNull(usuario9);
-		usuario10 = new Usuario(39887658, "Vinton", "Cerf", unlp);
+		usuario10 = new Usuario(39887656, "Vinton", "Cerf", unlp);
 		assertNotNull(usuario10);
 
 		articulo = new TipoTrabajo("Articulo");
@@ -321,13 +318,13 @@ public class TrabajoTest {
 	@Test
 	public void testObtenerTrabajosAsignadosRevisor(){
 		System.out.println("TrabajoTest-> Se comprueba la cantidad correcta de trabajos asignados a un evaluador");
-		assertEquals(1, usuarioDAO.findAllTrabajosAsignados(15682783).size());
+		assertEquals(1, usuarioDAO.findAllTrabajosAsignados(15682781).size());
 	}
 	
 	@Test
 	public void testObtenerTrabajosAsignadosRevisorErroneo(){
 		System.out.println("TrabajoTest-> Se comprueba la cantidad incorrecta de trabajos asignados a un evaluador");
-		assertNotEquals(10, usuarioDAO.findAllTrabajosAsignados(15682783).size());
+		assertNotEquals(10, usuarioDAO.findAllTrabajosAsignados(15682781).size());
 	}
 	
 	@Test
@@ -337,7 +334,7 @@ public class TrabajoTest {
 		desde.set(2018, 0, 1);
 		Calendar hasta = Calendar.getInstance();
 		hasta.set(2018, 11, 31);
-		assertEquals(1, usuarioDAO.findAllTrabajosInvestigacionEnRango(15682783, desde, hasta).size());
+		assertEquals(1, usuarioDAO.findAllTrabajosInvestigacionEnRango(15682781, desde, hasta).size());
 	}
 	
 	@Test
@@ -347,31 +344,31 @@ public class TrabajoTest {
 		desde.set(2018, 0, 1);
 		Calendar hasta = Calendar.getInstance();
 		hasta.set(2018, 11, 31);
-		assertNotEquals(7, usuarioDAO.findAllTrabajosInvestigacionEnRango(15682783, desde, hasta).size());
+		assertNotEquals(7, usuarioDAO.findAllTrabajosInvestigacionEnRango(15682781, desde, hasta).size());
 	}
 	
 	@Test
 	public void testObtenerTrabajosEnviados() {
 		System.out.println("TrabajoTest-> Se comprueba la cantidad correcta de trabajos presentados por un autor");
-		assertEquals(2, usuarioDAO.findAllTrabajosEnviados(10679754).size());
+		assertEquals(2, usuarioDAO.findAllTrabajosEnviados(10679753).size());
 	}
 	
 	@Test
 	public void testObtenerTrabajosEnviadosErroneo() {
 		System.out.println("TrabajoTest-> Se comprueba la cantidad incorrecta de trabajos presentados por un autor");
-		assertNotEquals(9, usuarioDAO.findAllTrabajosEnviados(10679754).size());
+		assertNotEquals(9, usuarioDAO.findAllTrabajosEnviados(10679753).size());
 	}
 	
 	@Test
 	public void testObtenerTrabajosSegunAutorRevisorTema(){
 		System.out.println("TrabajoTest-> Se comprueba cantidad de trabajos correcta segun autor, evaluador y tematica");
-		assertEquals(1, usuarioDAO.findAllTrabajosAutorRevisorTema(36626800, 39887658, ia.getId()).size());
+		assertEquals(1, usuarioDAO.findAllTrabajosAutorRevisorTema(36626803, 39887656, ia.getId()).size());
 	}
 	
 	@Test
 	public void testObtenerTrabajosSegunAutorRevisorTemaErroneo(){
 		System.out.println("TrabajoTest-> Se comprueba cantidad de trabajos incorrecta segun autor, evaluador y tematica");
-		assertNotEquals(2, usuarioDAO.findAllTrabajosAutorRevisorTema(36626800, 39887658, ia.getId()).size());
+		assertNotEquals(2, usuarioDAO.findAllTrabajosAutorRevisorTema(36626803, 39887656, ia.getId()).size());
 	}
 	
 	@AfterClass
