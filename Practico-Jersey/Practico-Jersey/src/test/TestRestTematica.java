@@ -1,4 +1,4 @@
-package com.practicoJersey;
+package test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class TestRestTematica {
 
-	public final String BASE_URL = "http://localhost:8080/ArqWeb/api";
+	public final String BASE_URL = "http://localhost:8080/Cacic2018/api";
 
 	public final HttpClient client = HttpClientBuilder.create().build();
 

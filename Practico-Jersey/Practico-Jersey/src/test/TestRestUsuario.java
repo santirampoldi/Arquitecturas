@@ -1,4 +1,4 @@
-package com.practicoJersey;
+package test;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -43,7 +43,7 @@ public class TestRestUsuario {
 	private static Usuario usuario;
 	private static Usuario usuarioBBDD;
 
-	public final String BASE_URL = "http://localhost:8080/ArqWeb/api";
+	public final String BASE_URL = "http://localhost:8080/Cacic2018/api";
 
 	public final HttpClient client = HttpClientBuilder.create().build();
 

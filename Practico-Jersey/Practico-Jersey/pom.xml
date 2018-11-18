@@ -2,16 +2,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>ArqWeb</groupId>
-	<artifactId>ArqWeb</artifactId>
+	<groupId>Cacic2018</groupId>
+	<artifactId>Cacic2018</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
 
 	<dependencies>
 		<dependency>
@@ -42,7 +40,6 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpasyncclient</artifactId>
 			<version>4.1.2</version>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
