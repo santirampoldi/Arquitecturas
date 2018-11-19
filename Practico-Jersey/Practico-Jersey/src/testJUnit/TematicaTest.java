@@ -61,10 +61,10 @@ public class TematicaTest {
 		assertFalse(!tematicaBBDD.getTipo());
 	}
 	
-	@AfterClass
-	public static void tearDown(){
-		System.out.println("LugarTest-> Se eliminan datos de la tabla tematica");
-		TematicaDAO.getInstance().removeAll();
-	}
+//	@AfterClass
+//	public static void tearDown(){
+//		System.out.println("LugarTest-> Se eliminan datos de la tabla tematica");
+//		TematicaDAO.getInstance().removeAll();
+//	}
 	
 }

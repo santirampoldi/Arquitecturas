@@ -16,7 +16,7 @@ public class EMF implements ServletContextListener {
 	 */
 	
 	public void contextInitialized(ServletContextEvent arg0) {
-		emf = Persistence.createEntityManagerFactory("TrabajoEspecial");
+		emf = Persistence.createEntityManagerFactory("Cacic2018");
 	}
 
 	/**
@@ -30,7 +30,7 @@ public class EMF implements ServletContextListener {
 	public static EntityManager createEntityManager() {
 		if (emf == null) {
 			System.out.println("creo EMF");
-			emf = Persistence.createEntityManagerFactory("TrabajoEspecial");	
+			emf = Persistence.createEntityManagerFactory("Cacic2018");	
 		}
 		return emf.createEntityManager();
 	}

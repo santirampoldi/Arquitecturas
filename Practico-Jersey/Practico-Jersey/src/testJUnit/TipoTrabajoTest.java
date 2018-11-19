@@ -49,11 +49,11 @@ public class TipoTrabajoTest {
 		assertNotEquals("Poster", tipoTrabajoBBDD.getNombre());
 	}
 	
-	@AfterClass
-	public static void tearDown(){
-		System.out.println("LugarTest-> Se eliminan datos de la tabla tipotrabajo");
-		TipoTrabajoDAO.getInstance().removeAll();
-	}
-	
+//	@AfterClass
+//	public static void tearDown(){
+//		System.out.println("LugarTest-> Se eliminan datos de la tabla tipotrabajo");
+//		TipoTrabajoDAO.getInstance().removeAll();
+//	}
+//	
 
 }
